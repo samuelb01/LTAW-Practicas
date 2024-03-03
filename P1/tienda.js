@@ -20,6 +20,7 @@ BACK-END
 // Importar módulos
 const http = require('http');   //-- Acceso a los elementos del módulo http 
 const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
+const { url } = require('inspector');
 
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
@@ -57,35 +58,46 @@ const server = http.createServer((req, res) => {
     console.log("Petición recibida:", req.url);
 
     // Construir la ruta completa al archivo solicitado
-    let recurso = req.url === '/' ? 'Pages/index.html' : 'Pages' + req.url;
+    let recurso;
 
-    // --- Valores por defecto ---
-    let code = 200;         // Código de respuesta
-    let code_msg = "OK";    // Mensaje asociado al código
-    // ---------------------------
+    if (req.url === '/') {
+        recurso = 'Pages/index.html';
+    } else if (req.url.startsWith('/Images/')) {
+        recurso = req.url.substring(1); // Eliminar la barra inicial
+    } else {
+        recurso = 'Pages' + req.url;
+    }
+
+    let content_type = 'text/html'; // Valor predeterminado
+    
+    if (req.url.endsWith('.html')) {
+        content_type = 'text/html';
+    } else if (req.url.endsWith('.css')) {
+        content_type = 'text/css';
+    } else if (req.url.endsWith('.js')) {
+        content_type = 'application/javascript';
+    } else if (req.url.endsWith('.png')) {
+        content_type = 'image/png';
+    }
 
     // Leer el archivo correspondiente al recurso solicitado
     leerFichero(recurso, (err, data) => {
         if (err) {
-            code = 404;             // Código de respuesta
-            code_msg = "Not Found"; // Mensaje asociado al código
-            page = pagina_error;    // Página asociada
+            res.statusCode = 404;             // Código de respuesta
+            res.statusMessage = "Not Found"; // Mensaje asociado al código
+            res.setHeader('Content-Type', 'text/html');
+            res.write(pagina_error);
+            res.end();
         } else {
-            page = data;
+            res.statusCode = 200;         // Código de respuesta
+            res.statusMessage = "OK";    // Mensaje asociado al código
+            res.setHeader('Content-Type', content_type);
+            res.write(data);
+            res.end();
         }
-
-        // Generar la respuesta en función de las variables
-        // code, code_msg y page
-        res.statusCode = code;
-        res.statusMessage = code_msg;
-        res.setHeader('Content-Type', 'text/html');
-        res.write(page);
-        res.end();
-
     });
-
-    
 });
+
 
 // SERVIDOR ESCUCHA
 server.listen(PORT);
