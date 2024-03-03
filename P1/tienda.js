@@ -24,87 +24,74 @@ const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficeh
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
 
-// Variables de las páginas a mostrar
-// ¿ Crear objeto o diccionario que las guarde todas?
-let pagina_main;
-let pagina_error;
-let producto1;
-let producto2;
-let producto3;
 
-// Lee archivos:
-// fichero -> Fichero a leer
-// pagina -> variabl donde se guarda la página
-function leerFicheros(fichero, pagina) {
-    //-- Fichero HTML de la página principal
+const pagina_error = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi tienda</title>
+</head>
+<body style="background-color: red">
+    <h1 style="color: white">ERROR!!!!</h1>
+</body>
+</html>`
+
+// Función para leer archivos
+function leerFichero(fichero, callback) {
     fs.readFile(fichero, 'utf-8', (err, data) => {
-        if (err) {  //-- Ocurre un error
-            console.log("ERROR!!")
-            console.log(err.message);
-        }
-        else {  //-- No ha ocurrido ningún error
-            console.log("Lectura completada...");
-
-            // Al ser una función asíncrona hay que declarar la variable
-            // dentro de la función de callback
-            pagina = data;
+        if (err) {
+            console.error("ERROR al leer el archivo:", fichero, err);
+            callback(err, null);
+        } else {
+            console.log(`Lectura completada de ${fichero}`);
+            callback(null, data);
         }
     });
-};
+}
 
-leerFicheros('index.html', pagina_main);
-leerFicheros('error.html', pagina_error);
-leerFicheros('producto1.html', producto1);
-leerFicheros('producto2.html', producto2);
-leerFicheros('producto3.html', producto3);
-
-console.log('hola ' + pagina_main);
-
-//-- Se crea el servidor con la función de retrollamada
+// Crear el servidor HTTP
 const server = http.createServer((req, res) => {
-    // Cada vez que el cliente quiere acceder al servidor entra aquí
-    console.log("Petición recibidad!");
+    console.log("Petición recibida:", req.url);
+
+    // Construir la ruta completa al archivo solicitado
+    let recurso = req.url === '/' ? 'Pages/index.html' : 'Pages' + req.url;
 
     // --- Valores por defecto ---
     let code = 200;         // Código de respuesta
     let code_msg = "OK";    // Mensaje asociado al código
-    let page = pagina_main; // Página asociada
     // ---------------------------
 
-    // Se analiza el recurso
-    // Se construye el objeto URL con la url de la solicitud
-    const url = new URL(req.url, 'http://' + req.headers['host']);
+    // Leer el archivo correspondiente al recurso solicitado
+    leerFichero(recurso, (err, data) => {
+        if (err) {
+            code = 404;             // Código de respuesta
+            code_msg = "Not Found"; // Mensaje asociado al código
+            page = pagina_error;    // Página asociada
+        } else {
+            page = data;
+        }
 
+        // Generar la respuesta en función de las variables
+        // code, code_msg y page
+        res.statusCode = code;
+        res.statusMessage = code_msg;
+        res.setHeader('Content-Type', 'text/html');
+        res.write(page);
+        res.end();
 
-    // --- Recurso NO página principal ---
-    if (url.pathname == '/producto1') {
-        page = producto1;
+    });
 
-    } if (url.pathname == '/producto2') {
-        page = producto2;
-
-    } if (url.pathname == '/producto3') {
-        page = producto3;
-
-    } else if (url.pathname != '/') {
-        code = 404;             // Código de respuesta
-        code_msg = "Not Found"; // Mensaje asociado al código
-        page = pagina_error;    // Página asociada
-    }
-    // -----------------------------------
-
-
-    // Generar la respuesta en función de las variables
-    // code, code_msg y page
-    res.statusCode = code;
-    res.statusMessage = code_msg;
-    res.setHeader('Content-Type', 'text/html');
-    res.write(page);
-    res.end();
-    
     
 });
 
 // SERVIDOR ESCUCHA
 server.listen(PORT);
 console.log('SERVIDOR INICIADO EN EL PUERTO: ' + PORT);
+
+
+
+
+

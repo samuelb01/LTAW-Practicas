@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.productos {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.producto {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    margin-right: 20px;
+}
+
+.producto img {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.producto a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.producto a:hover {
+    color: green;
+}
