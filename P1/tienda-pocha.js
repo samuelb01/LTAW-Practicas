@@ -1,94 +1,63 @@
-/*
-tienda on-line
-crear back-end y front-end
-Documentación técnica y manual de usuario en markdown en la wiki de la P1
-Si se implementan mejoras indicarlo
-*/
+// MÓDULOS
+const http = require('http');
+const fs = require('fs');
+const { url } = require('inspector');
 
-/*
-BACK-END
-- Implementar con node.js
-- usar módulos http y fs
-- Nombre del servidor en la carpeta P1 con nombre tienda.js
-- Servidor debe escuchar en el puerto 9090
-- Tiene que poder servir archivos html, css, javascript e imágenes
-- Si se pide un recurso no disponible tiene que generar un mensaje de error
-*/
-
-const http = require('http'); //-- Acceso a los elementos del módulo http 
-const fs = require('fs'); //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
+const path = require('path');
 
 
-//-- Definir puerto a utilizar (9090)
+// PUERTO
 const PORT = 9090;
 
-//-- Texto HTML de la página principal
-let pagina_main = 'index.html';
 
-//-- Texto HTML de la página de error
-const pagina_error = 'error.html';
-
-let index;
-
-fs.readFile(pagina_main, 'utf-8', (err, data) => {
-    if (err) {  //-- Ocurre un error
-        console.log("ERROR!!")
-        console.log(err.message);
-    }
-    else {  //-- No ha ocurrido ningún error
-        console.log("Lectura completada...")
-        console.log("Contenido ");
-    }
-
-    index = data;
-
-});
-
-fs.readFile(pagina_main, 'utf-8', (err, page) => {
-    if (err) {  //-- Ocurre un error
-        console.log("ERROR!!")
-        console.log(err.message);
-    }
-    else {  //-- No ha ocurrido ningún error
-        console.log("Lectura completada...")
-        console.log("Contenido ");
-    }
-
-});
+// FUNCIÓN PARA LEER FICHEROS
+function leerFichero(fichero, callback) {
+    fs.readFile(fichero, 'utf-8', (err, data) => {
+        if (err) {
+            console.error("ERROR al leer el archivo:", fichero, err);
+            callback(err, null);
+        } else {
+            console.log(`Lectura completada de ${fichero}`);
+            callback(null, data);
+        }
+    });
+}
 
 
-//-- Creación del servidor con la función de retrollamada
-const server = http.createServer((req, res)=>{
-    console.log("Petición recibida!");
+// SE CREA EL SERVIDOR
+const server = http.createServer((req, res) => {
+    console.log("Petición recibida:", req.url);
 
-    //-- Valores de la respuesta por defecto
-    let code = 200;
-    let code_msg = "OK";
-    let page = pagina_main;
+    let estado = 200;
+    let mensaje_estado = "OK"; 
 
-    //-- Analizar el recurso
-    //-- Construir el objeto url con la url de la solicitud
-    const url = new URL(req.url, 'http://' + req.headers['host']);
-    console.log(url.pathname);
+    let recurso;
+    let content_type;
 
-    //-- Cualquier recurso que no sea la página principal
-    //-- genera un error
-    if (url.pathname != '/') {
-        code = 404;
-        code_msg = "Not Found";
-        page = pagina_error;
+    if (req.url === '/') {
+        recurso = './Pages/pocha.html'
+        content_type = 'text/html'
+    } else if (req.url.startsWith('/Images/')) {
+        console.log('-direname: ' + __dirname);  // muestra mensaje (quitarlo)
+        recurso = path.join(__dirname, req.url)
+        content_type = 'image/jpeg'
     }
 
-    //-- Generar la respuesta en función de las variables
-    //-- code, code_msg y page
-    res.statusCode = code;
-    res.statusMessage = code_msg;
-    res.setHeader('Content-Type','text/html');
-    res.write(index);
-    res.end();
+    leerFichero(recurso, (err, data) => {
+        if (err) {
+            console.log('ERROR');
+        } else {
+            res.statusCode = 200;
+            res.statusMessage = "OK";
+            res.setHeader('Content-Type', content_type);
+            res.write(data);
+            res.end();
+        }
+    })
 });
 
 
+
+// SERVIDOR ESCUCHA
 server.listen(PORT);
-console.log('servidor iniciado. Escuchando en el puerto: ' + PORT);
-
+console.log('SERVIDOR INICIADO EN EL PUERTO: ' + PORT);

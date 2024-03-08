@@ -21,6 +21,7 @@ BACK-END
 const http = require('http');   //-- Acceso a los elementos del módulo http 
 const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
 const { url } = require('inspector');
+const path = require('path');  //-- Módulo para las rutas
 
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
@@ -61,15 +62,17 @@ const server = http.createServer((req, res) => {
     let recurso;
 
     if (req.url === '/') {
-        recurso = 'Pages/index.html';
+        recurso = '../Pages/index.html';
     } else if (req.url.startsWith('/Images/')) {
-        recurso = req.url.substring(1); // Eliminar la barra inicial
+        recurso = '.' + req.url;
+        //recurso = req.url.substring(1); // Eliminar la barra inicial
     } else {
         recurso = 'Pages' + req.url;
     }
 
     let content_type = 'text/html'; // Valor predeterminado
-    
+
+    // Distintos Content-Type para distintos archivos
     if (req.url.endsWith('.html')) {
         content_type = 'text/html';
     } else if (req.url.endsWith('.css')) {
@@ -78,7 +81,11 @@ const server = http.createServer((req, res) => {
         content_type = 'application/javascript';
     } else if (req.url.endsWith('.png')) {
         content_type = 'image/png';
+    } else if (req.url.endsWith('.jpeg')) {
+        content_type = 'image/jpeg';
     }
+
+    console.log('RECURSO -> ' + recurso);
 
     // Leer el archivo correspondiente al recurso solicitado
     leerFichero(recurso, (err, data) => {
@@ -94,6 +101,8 @@ const server = http.createServer((req, res) => {
             res.setHeader('Content-Type', content_type);
             res.write(data);
             res.end();
+
+            console.log('Has enviaddo algo');
         }
     });
 });
