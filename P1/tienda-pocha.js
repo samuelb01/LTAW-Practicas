@@ -1,63 +1,51 @@
-// MÓDULOS
-const http = require('http');
-const fs = require('fs');
+// Importar módulos
+const http = require('http');   //-- Acceso a los elementos del módulo http 
+const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
 const { url } = require('inspector');
 
-const path = require('path');
-
-
-// PUERTO
+// Puerto que se va a utilizar (9090)
 const PORT = 9090;
 
-
-// FUNCIÓN PARA LEER FICHEROS
-function leerFichero(fichero, callback) {
-    fs.readFile(fichero, 'utf-8', (err, data) => {
-        if (err) {
-            console.error("ERROR al leer el archivo:", fichero, err);
-            callback(err, null);
-        } else {
-            console.log(`Lectura completada de ${fichero}`);
-            callback(null, data);
-        }
-    });
-}
-
-
-// SE CREA EL SERVIDOR
 const server = http.createServer((req, res) => {
     console.log("Petición recibida:", req.url);
 
-    let estado = 200;
-    let mensaje_estado = "OK"; 
+    // Analizar recurso
+    if (req.url == '/') {
+        recurso = './Pages/hola.html';
+    } else {
+        recurso = '.' + req.url;
+    }
+    console.log(recurso);
 
-    let recurso;
-    let content_type;
-
-    if (req.url === '/') {
-        recurso = './Pages/pocha.html'
+    
+    // Declarar el Content-Type
+    if (req.url.endsWith('.png')) {
+        content_type = 'image/png';
+    } else {  // Valor por defecto -> HTML
         content_type = 'text/html'
-    } else if (req.url.startsWith('/Images/')) {
-        console.log('-direname: ' + __dirname);  // muestra mensaje (quitarlo)
-        recurso = path.join(__dirname, req.url)
-        content_type = 'image/jpeg'
     }
 
-    leerFichero(recurso, (err, data) => {
+    fs.readFile(recurso, (err, data) => {
+
         if (err) {
-            console.log('ERROR');
+            res.statusCode = 404;             // Código de respuesta
+            res.statusMessage = "Not Found"; // Mensaje asociado al código
+            res.setHeader('Content-Type', 'text/html');
+            res.write(pagina_error);
+            res.end();
         } else {
-            res.statusCode = 200;
-            res.statusMessage = "OK";
+            res.statusCode = 200;         // Código de respuesta
+            res.statusMessage = "OK";    // Mensaje asociado al código
             res.setHeader('Content-Type', content_type);
             res.write(data);
             res.end();
+
+            console.log('Has enviaddo algo');
         }
-    })
+
+    });
 });
 
-
-
-// SERVIDOR ESCUCHA
-server.listen(PORT);
-console.log('SERVIDOR INICIADO EN EL PUERTO: ' + PORT);
+server.listen(PORT, () => {
+    console.log("Escuchando en puerto: " + PORT);
+})

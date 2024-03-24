@@ -21,7 +21,6 @@ BACK-END
 const http = require('http');   //-- Acceso a los elementos del módulo http 
 const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
 const { url } = require('inspector');
-const path = require('path');  //-- Módulo para las rutas
 
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
@@ -58,17 +57,24 @@ function leerFichero(fichero, callback) {
 const server = http.createServer((req, res) => {
     console.log("Petición recibida:", req.url);
 
+
     // Construir la ruta completa al archivo solicitado
     let recurso;
 
-    if (req.url === '/') {
-        recurso = '../Pages/index.html';
+    if (req.url == '/') {
+        recurso = './Pages/hola.html';
     } else if (req.url.startsWith('/Images/')) {
         recurso = '.' + req.url;
         //recurso = req.url.substring(1); // Eliminar la barra inicial
     } else {
         recurso = 'Pages' + req.url;
     }
+    
+
+    // Leer el archivo correspondiente al recurso solicitado
+    leerFichero(recurso, (err, data) => {
+
+
 
     let content_type = 'text/html'; // Valor predeterminado
 
@@ -87,8 +93,7 @@ const server = http.createServer((req, res) => {
 
     console.log('RECURSO -> ' + recurso);
 
-    // Leer el archivo correspondiente al recurso solicitado
-    leerFichero(recurso, (err, data) => {
+
         if (err) {
             res.statusCode = 404;             // Código de respuesta
             res.statusMessage = "Not Found"; // Mensaje asociado al código
