@@ -1,12 +1,17 @@
+header {
+    font-family: 'Luckiest Guy';
+    font-size: 20px;
+}
+
 body {
     font-family: Arial, sans-serif; /* Utilizar una fuente legible */
 
-     /* Establecer el fondo en mosaico */
-     background-image: url('../Images/icono-FunkoVerse.png');
-     background-repeat: repeat;
-   
-     /* Añadir espacio entre los iconos en mosaico */
-     background-size: 180px; /* Ajusta el tamaño según el espacio que quieras agregar */
+    /* Establecer el fondo en mosaico */
+    background-image: url('../Images/icono-FunkoVerse.png');
+    background-repeat: repeat;
+
+    /* Añadir espacio entre los iconos en mosaico */
+    background-size: 180px; /* Ajusta el tamaño según el espacio que quieras agregar */
 }
 
 h1 {
