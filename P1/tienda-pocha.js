@@ -37,23 +37,14 @@ function leerFichero(fichero, callback) {
 
 const server = http.createServer((req, res) => {
     console.log("Petición recibida:", req.url);
-
-    // Analizar recurso
-    if (req.url.ends) {
-        recurso = './Pages/hola.html';
-    } else {
-        recurso = '.' + req.url;
-    }
-    console.log(recurso);  // QUITAR
-
     
-    // Declarar el Content-Type
+    // Declarar el Content-Type y recurso
     if (req.url.endsWith('.png')) {  //--PNG
         content_type = 'image/png';
         recurso = '.' + req.url;
-    } else if (req.url.endsWith('.html')) {
+    } else if (req.url.endsWith('.html')) {  //-- HTML
         content_type = 'text/html'
-        recurso = './Pages/hola.html'
+        recurso = '.' + req.url;
     } else if (req.url.endsWith('.css')) {  //--CSS
         content_type = 'text/css';
         recurso = '.' + req.url;
@@ -63,9 +54,9 @@ const server = http.createServer((req, res) => {
     } else if (req.url.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
         recurso = '.' + req.url;
-    } else {  // Valor por defecto -> HTML
+    } else {  // Valor por defecto -> HTML - tienda.html
         content_type = 'text/html'
-        recurso = './Pages/hola.html'
+        recurso = './Pages/tienda.html'
     }
 
     leerFichero(recurso, (err, data) => {
