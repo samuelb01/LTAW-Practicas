@@ -5,31 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi tienda</title>
-    <style>
-        .producto {
-            display: flex;
-            margin-bottom: 20px; /* Add some space between product blocks */
-        }
-        .producto img {
-            max-width: 100px; /* Adjust image width as needed */
-            margin-right: 20px; /* Add space between image and description */
-        }
-        .descripcion {
-            flex: 1; /* Take remaining space */
-        }
-        .precio {
-            font-weight: bold; /* Make price text bold */
-        }
-    </style>
+    <link rel="stylesheet" href="../Style/tienda.css">
 </head>
 <body>
 
-    <h1>MI TIENDA</h1>
-    <div>
-       <p>
-        Bienvenido
-       </p> 
-    </div>
+    <header>
+        <h1>Mi Tienda</h1>
+    </header>
 
     <div class="productos">
         <div class="producto">
@@ -38,7 +20,7 @@
                 <h2>Producto 1</h2>
                 <p>Descripción del Producto 1</p>
                 <p class="precio">$10.99</p>
-                <a href="http://localhost:9090/PumpkinKing.html">Ver más</a>
+                <a href="../Pages/PumpkinKing.html">Ver más</a>
             </div>
         </div>
 
@@ -48,19 +30,20 @@
                 <h2>Producto 2</h2>
                 <p>Descripción del Producto 2</p>
                 <p class="precio">$15.99</p>
-                <a href="http://localhost:9090/Sally.html">Ver más</a>
+                <a href="../Pages/Sally.html">Ver más</a>
             </div>
         </div>
 
         <div class="producto">
-            <img src="../Images/Oogie-Boogie.png" alt="Producto 3">
+            <img src="../Images/Oogie-Boogie.png" alt="Oogie Boogie">
             <div class="descripcion">
                 <h2>Producto 3</h2>
                 <p>Descripción del Producto 3</p>
                 <p class="precio">$20.99</p>
-                <a href="http://localhost:9090/Oogie-Boogie.html">Ver más</a>
+                <a href="../Pages/Oogie-Boogie.html">Ver más</a>
             </div>
         </div>
     </div>
+
 </body>
 </html>

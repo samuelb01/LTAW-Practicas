@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif; /* Utilizar una fuente legible */
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Color de fondo */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px; /* Añadir espacio superior */
+}
+
+.productos {
+    display: flex;
+    justify-content: center; /* Centrar los productos horizontalmente */
+    flex-wrap: wrap; /* Permitir que los productos se ajusten en pantallas más pequeñas */
+    padding: 20px;
+}
+
+.producto {
+    width: 300px;
+    background-color: #fff; /* Fondo blanco para cada producto */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+.producto:hover {
+    transform: translateY(-5px); /* Levantar el producto al pasar el ratón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.producto img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.descripcion {
+    padding: 20px;
+}
+
+.precio {
+    font-weight: bold;
+    color: #333; /* Color del texto del precio */
+}
+
+a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #007bff; /* Color de fondo del enlace */
+    color: #fff; /* Color del texto del enlace */
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+a:hover {
+    background-color: #0056b3; /* Color de fondo del enlace al pasar el ratón */
+}
