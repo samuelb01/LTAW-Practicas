@@ -1,24 +1,11 @@
 // Importar módulos
 const http = require('http');   //-- Acceso a los elementos del módulo http 
-const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los ficehro del ordenador
+const fs = require('fs');   //-- Módulo fs para acceder con Node.js a los fichero del ordenador
 const { url } = require('inspector');
+
 
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
-
-const pagina_error = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi tienda</title>
-</head>
-<body style="background-color: red">
-    <h1 style="color: white">ERROR!!!!</h1>
-</body>
-</html>`
 
 
 // Función para leer archivos
@@ -42,21 +29,33 @@ const server = http.createServer((req, res) => {
     if (req.url.endsWith('.png')) {  //--PNG
         content_type = 'image/png';
         recurso = '.' + req.url;
+
     } else if (req.url.endsWith('.html')) {  //-- HTML
         content_type = 'text/html'
         recurso = '.' + req.url;
+
     } else if (req.url.endsWith('.css')) {  //--CSS
         content_type = 'text/css';
         recurso = '.' + req.url;
+
     } else if (req.url.endsWith('.js')) {  //--JS
         content_type = 'application/javascript';
         recurso = '.' + req.url;
+        console.log('Ha llegado un js')
+        console.log(content_type)
+        console.log(recurso)
+
     } else if (req.url.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
         recurso = '.' + req.url;
-    } else {  // Valor por defecto -> HTML - tienda.html
+
+    } else if (req.url == '/') {
         content_type = 'text/html'
         recurso = './Pages/tienda.html'
+
+    } else {  // Valor por defecto -> HTML - error.html
+        content_type = 'text/html'
+        recurso = './Pages/pagina-error.html'
     }
 
     leerFichero(recurso, (err, data) => {

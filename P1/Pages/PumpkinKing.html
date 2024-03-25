@@ -4,29 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre del Producto</title>
-    <link rel="stylesheet" href="../Style/PumpinKing.css"> <!-- Enlaza un CSS específico para esta página de producto si es necesario -->
+    <title>PumpinKing</title>
+    <link rel="stylesheet" href="../Style/PumpinKing.css">
+    <script>
+        function cambiarImagen(elemento, nuevaImagen) {  
+            // Cambiar imagen al pasar ratón por encima
+            elemento.querySelector('.nombre-imagen-producto img').src = nuevaImagen;
+        }
+        
+        function restaurarImagen(elemento, originalImagen) {  
+            // Cuando se quita el ratón vuelve a la imagen original
+            elemento.querySelector('.nombre-imagen-producto img').src = originalImagen; 
+        }
+    </script>
 </head>
+
 <body>
+    
 
-    <header>
-        <h1>Nombre del Producto</h1>
-        <nav>
-            <a href="../Pages/tienda.html">Volver a la página principal</a>
-        </nav>
-    </header>
+    <div class="contenedor">
+        <div class="nombre-imagen-producto">
+            <div class="nombre">
+                <h1>The Nightmare Before Christmas - Pumpkin King</h1>
+            </div>
 
-    <div class="contenido-producto">
-        <img src="../Images/PumpkinKing.png" alt="Nombre del Producto">
-        <div class="descripcion">
-            <h2>Nombre del Producto</h2>
-            <p>Descripción detallada del producto.</p>
-            <p class="precio">$XX.XX</p>
-            <!-- Agrega más detalles según sea necesario -->
+            <div class="imagen" onmouseover="cambiarImagen(this, '../Images/PumpkinKing.png')" onmouseout="restaurarImagen(this, '../Images/PumpkinKing-box.png')">
+                <img src="../Images/PumpkinKing-box.png" alt="PumpkinKing-Box">
+            </div>
+        </div>
+
+        <div class="info-producto">
+            <div class="descripcion-producto">
+                <p> 
+                    What's this? ¡El Rey Calabaza ha traído Halloween 
+                    a Halloween Tow! ¡No ha nadie mejor para pasar un momento
+                    inquietantemente divertido que Jack Skellington como el 
+                    Pumpkin King.
+                </p>
+            </div>
+    
+            <div class="precio">
+                <p class="precio">PRECIO: 15,00€</p>
+                <a href="#">Comprar</a>
+            </div>
+
+            <div class="boton-retorno">
+                <a href="../Pages/tienda.html">Volver a la tienda</a>
+            </div>
         </div>
     </div>
-
-    <!-- Agrega más contenido según sea necesario -->
-
+    
 </body>
+
 </html>

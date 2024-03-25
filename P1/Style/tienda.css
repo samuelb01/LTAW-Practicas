@@ -1,13 +1,18 @@
 body {
     font-family: Arial, sans-serif; /* Utilizar una fuente legible */
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8; /* Color de fondo */
+
+     /* Establecer el fondo en mosaico */
+     background-image: url('../Images/icono-FunkoVerse.png');
+     background-repeat: repeat;
+   
+     /* Añadir espacio entre los iconos en mosaico */
+     background-size: 180px; /* Ajusta el tamaño según el espacio que quieras agregar */
 }
 
 h1 {
     text-align: center;
     margin-top: 20px; /* Añadir espacio superior */
+    color: rgb(0, 0, 0);
 }
 
 .productos {
@@ -19,7 +24,7 @@ h1 {
 
 .producto {
     width: 300px;
-    background-color: #fff; /* Fondo blanco para cada producto */
+    background-color: #e9ecef; /* Fondo blanco para cada producto */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
     margin: 20px;
@@ -51,12 +56,12 @@ a {
     text-align: center;
     padding: 10px;
     text-decoration: none;
-    background-color: #007bff; /* Color de fondo del enlace */
+    background-color: #5e17eb; /* Color de fondo del enlace */
     color: #fff; /* Color del texto del enlace */
     border-radius: 4px;
     transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
 }
 
 a:hover {
-    background-color: #0056b3; /* Color de fondo del enlace al pasar el ratón */
+    background-color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
 }
