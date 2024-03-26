@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tobi</title>
+    <link rel="stylesheet" href="../Style/style-Naruto.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+    <script>
+        function cambiarImagen(elemento, nuevaImagen) {  
+            // Cambiar imagen al pasar ratón por encima
+            elemento.querySelector('.nombre-imagen-producto img').src = nuevaImagen;
+        }
+        
+        function restaurarImagen(elemento, originalImagen) {  
+            // Cuando se quita el ratón vuelve a la imagen original
+            elemento.querySelector('.nombre-imagen-producto img').src = originalImagen; 
+        }
+    </script>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="nombre-imagen-producto">
+            <div class="nombre">
+                <h1>Naruto - Tobi</h1>
+            </div>
+
+            <div class="imagen" onmouseover="cambiarImagen(this, '../Images/Tobi.png')" onmouseout="restaurarImagen(this, '../Images/Tobi-box.png')">
+                <img src="../Images/Tobi-box.png" alt="Tobi-box">
+            </div>
+        </div>
+
+        <div class="info-producto">
+            <div class="descripcion-producto">
+                <p>
+                    Obito Uchiha se esconde bajo una máscara y el nombre de Tobi, planeando 
+                    la creación del mundo ideal, como Madara planeó antes que él. ¡Ayúdale con su plan
+                    añadiendolo a tu colección de Naruto!
+                </p>
+            </div>
+    
+            <div class="precio">
+                <p>PRECIO: 15,00€</p>
+                <a href="#">Comprar</a>
+            </div>
+
+            <div class="boton-retorno">
+                <a href="../Pages/tienda.html">Volver a la tienda</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
