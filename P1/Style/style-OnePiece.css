@@ -2,11 +2,9 @@ body {
     font-family: Arial, sans-serif; 
     background-color: white;
     /* Establecer el fondo en mosaico */
-    background-image: url('../Images/icono-TheNightmareBeforeChristmas.png');
+    background-image: url('../Images/icono-OnePiece.png');
     background-repeat: space;
-  
-    /* Añadir espacio entre los iconos en mosaico */
-    background-size: 68px; /* Ajusta el tamaño según el espacio que quieras agregar */
+    background-size: 80px;
 }
 
 .contenedor {
