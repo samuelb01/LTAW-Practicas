@@ -4,14 +4,12 @@ header {
 }
 
 body {
-    font-family: Arial, sans-serif; /* Utilizar una fuente legible */
+    font-family: Arial, sans-serif; 
 
     /* Establecer el fondo en mosaico */
     background-image: url('../Images/icono-FunkoVerse.png');
     background-repeat: repeat;
-
-    /* Añadir espacio entre los iconos en mosaico */
-    background-size: 180px; /* Ajusta el tamaño según el espacio que quieras agregar */
+    background-size: 180px; 
 }
 
 h1 {
@@ -29,7 +27,7 @@ h1 {
 
 .producto {
     width: 300px;
-    background-color: #e9ecef; /* Fondo blanco para cada producto */
+    background-color: #e9ecef; /* Fondo para cada producto */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
     margin: 20px;
@@ -53,7 +51,7 @@ h1 {
 
 .precio {
     font-weight: bold;
-    color: #333; /* Color del texto del precio */
+    color: black; /* Color del texto del precio */
 }
 
 a {
