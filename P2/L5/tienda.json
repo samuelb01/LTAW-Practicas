@@ -4,22 +4,21 @@
             "nombre": "The Nightmare Before Christmas - Sally",
             "descripcion": "Figura Sally",
             "precio": "15.00",
-            "stock": "5"        
+            "stock": "8"
         },
         {
             "nombre": "The Nightmare Before Christmas - Pumpkin King",
             "descripcion": "Figura Pumpkin King",
             "precio": "15.00",
-            "stock": "5"        
+            "stock": "8"
         },
         {
             "nombre": "The Nightmare Before Christmas - Oogie Boogie",
             "descripcion": "Figura Oogie Boogie",
             "precio": "15.00",
-            "stock": "5"        
+            "stock": "8"
         }
     ],
-
     "usuarios": [
         {
             "nombre_usuario": "root",
@@ -34,7 +33,6 @@
             "password": "HolaSoySamuel"
         }
     ],
-        
     "pedidos": [
         {
             "nombre_usuario": "saamu28",
@@ -42,7 +40,7 @@
                 "calle": "Mi casa",
                 "numero": "120",
                 "piso": "2",
-                "puerta": "B"
+                "puerta": ""
             },
             "tarjeta": 1234567891234567,
             "lista_productos": "The Nightmare Before Christmas: Sally"
