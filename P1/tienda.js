@@ -7,6 +7,8 @@ const { url } = require('inspector');
 // Puerto que se va a utilizar (9090)
 const PORT = 9090;
 
+const pagina_error = fs.readFileSync('./Pages/pagina-error.html', 'utf8');
+
 
 // Función para leer archivos
 function leerFichero(fichero, callback) {
@@ -28,26 +30,23 @@ const server = http.createServer((req, res) => {
     // Declarar el Content-Type y recurso
     if (req.url.endsWith('.png')) {  //--PNG
         content_type = 'image/png';
-        recurso = '.' + req.url;
+        recurso = './Images/' + req.url.split('/').pop();
 
     } else if (req.url.endsWith('.html')) {  //-- HTML
         content_type = 'text/html'
-        recurso = '.' + req.url;
+        recurso = './Pages/' + req.url.split('/').pop();
 
     } else if (req.url.endsWith('.css')) {  //--CSS
         content_type = 'text/css';
-        recurso = '.' + req.url;
+        recurso = './Style/' + req.url.split('/').pop();
 
     } else if (req.url.endsWith('.js')) {  //--JS
         content_type = 'application/javascript';
-        recurso = '.' + req.url;
-        console.log('Ha llegado un js')
-        console.log(content_type)
-        console.log(recurso)
+        recurso = './JS/' + req.url.split('/').pop();
 
     } else if (req.url.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
-        recurso = '.' + req.url;
+        recurso = './Images/' + req.url.split('/').pop();
 
     } else if (req.url == '/') {
         content_type = 'text/html'
@@ -55,7 +54,7 @@ const server = http.createServer((req, res) => {
 
     } else {  // Valor por defecto -> HTML - error.html
         content_type = 'text/html'
-        recurso = './Pages/pagina-error.html'
+        recurso = pagina_error
     }
 
     leerFichero(recurso, (err, data) => {
