@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
 
     } else if (req.url.endsWith('.js')) {  //--JS
         content_type = 'application/javascript';
-        recurso = './JS/' + req.url.split('/').pop();
+        recurso = './js/' + req.url.split('/').pop();
 
     } else if (req.url.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
