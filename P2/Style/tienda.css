@@ -1,0 +1,70 @@
+header {
+    font-family: 'Luckiest Guy';
+    font-size: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif; 
+
+    /* Establecer el fondo en mosaico */
+    background-image: url('../Images/icono-FunkoVerse.png');
+    background-repeat: repeat;
+    background-size: 180px; 
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px; /* Añadir espacio superior */
+    color: rgb(0, 0, 0);
+}
+
+.productos {
+    display: flex;
+    justify-content: center; /* Centrar los productos horizontalmente */
+    flex-wrap: wrap; /* Permitir que los productos se ajusten en pantallas más pequeñas */
+    padding: 20px;
+}
+
+.producto {
+    width: 300px;
+    background-color: #e9ecef; /* Fondo para cada producto */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+.producto:hover {
+    transform: translateY(-5px); /* Levantar el producto al pasar el ratón */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.producto img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.descripcion {
+    padding: 20px;
+}
+
+.precio {
+    font-weight: bold;
+    color: black; /* Color del texto del precio */
+}
+
+a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #5e17eb; /* Color de fondo del enlace */
+    color: #fff; /* Color del texto del enlace */
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+a:hover {
+    background-color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
+}

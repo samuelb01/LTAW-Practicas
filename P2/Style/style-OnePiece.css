@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif; 
+    background-color: white;
+    /* Establecer el fondo en mosaico */
+    background-image: url('../Images/icono-OnePiece.png');
+    background-repeat: space;
+    background-size: 80px;
+}
+
+.contenedor {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #e9ecef;
+}
+
+.nombre-imagen-producto {
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    margin: 30px;
+    border-color: #cb6ce6;
+}
+
+.nombre-imagen-producto img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+    transition: transform 0.5s ease; /* Agregar una transición de 0.5 segundos */
+}
+
+.nombre-imagen-producto:hover img {
+    transform: scale(1.1); /* Ampliar la imagen al pasar el ratón por encima */
+}
+
+.nombre {
+    font-family: 'Luckiest Guy';
+    margin: auto;
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.descripcion-producto {
+    margin: 30px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.precio {
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+a {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #5e17eb;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: auto;
+}
+
+a:hover {
+    background-color: #cb6ce6;
+}
+
+.boton-retorno {
+    padding-bottom: 10px;
+}

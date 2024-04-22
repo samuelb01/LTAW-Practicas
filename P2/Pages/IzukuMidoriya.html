@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izuku Midoriya</title>
+    <link rel="stylesheet" href="../Style/style-MyHeroAcademia.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+    <script>
+        function cambiarImagen(elemento, nuevaImagen) {  
+            // Cambiar imagen al pasar ratón por encima
+            elemento.querySelector('.nombre-imagen-producto img').src = nuevaImagen;
+        }
+        
+        function restaurarImagen(elemento, originalImagen) {  
+            // Cuando se quita el ratón vuelve a la imagen original
+            elemento.querySelector('.nombre-imagen-producto img').src = originalImagen; 
+        }
+    </script>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="nombre-imagen-producto">
+            <div class="nombre">
+                <h1>My Hero Academia - Izuku Midoriya</h1>
+            </div>
+
+            <div class="imagen" onmouseover="cambiarImagen(this, '../Images/IzukuMidoriya.png')" onmouseout="restaurarImagen(this, '../Images/IzukuMidoriya-box.png')">
+                <img src="../Images/IzukuMidoriya-box.png" alt="Izuku Midoriya-box">
+            </div>
+        </div>
+
+        <div class="info-producto">
+            <div class="descripcion-producto">
+                <p>
+                    Izuku Midoriya nació sin poderes, pero gracias al mítico
+                    héroe All Might heredó el poder del One For All. Gracias a 
+                    su entrenamiento ha conseguido ponerse a la altura de sus compañeros, 
+                    aunque aún le queda un duro camino. ¿Le ayudarás a conseguirlo?
+                </p>
+            </div>
+    
+            <div class="precio">
+                <p>PRECIO: 15,00€</p>
+                <a href="#">Comprar</a>
+            </div>
+
+            <div class="boton-retorno">
+                <a href="../Pages/tienda.html">Volver a la tienda</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
