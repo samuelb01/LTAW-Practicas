@@ -40,7 +40,9 @@ body {
 
 .contenedor {
     margin-top: 2%;
-    margin-left: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
+    min-width: fit-content;
     display: flex;
     justify-content: center;
     max-width: 60%;
@@ -56,6 +58,7 @@ body {
 }
 
 .nombre-imagen-producto {
+    flex: 0 0 50%;
     max-height: 90%;
     max-width: 90%;
     text-align: center;
@@ -68,7 +71,8 @@ body {
 
 .nombre-imagen-producto img {
     max-width: 100%;
-    height: auto;
+    height: 75%;
+    width: 75%;
     border-radius: 8px 8px 0 0;
     transition: transform 0.5s ease; /* Agregar una transición de 0.5 segundos */
 }
@@ -83,7 +87,7 @@ body {
     display: inline-block;
     text-align: center;
     padding: 20px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .descripcion-producto {

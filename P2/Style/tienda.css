@@ -31,7 +31,6 @@ header {
     display: flex; /* Utilizar flexbox para alinear los elementos en fila */
     justify-content: space-between; /* Distribuir los elementos equitativamente en la fila */
     margin: 0 10%; /* Añadir espacio horizontal entre los enlaces */
-    font-size: large;
 }
 
 .naveg a {
@@ -106,8 +105,4 @@ h1 {
     color: #fff; /* Color del texto del enlace */
     border-radius: 4px;
     transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
-}
-
-.productos a:hover {
-    background-color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
 }
