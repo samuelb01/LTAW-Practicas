@@ -42,13 +42,12 @@ body {
     margin-top: 2%;
     margin-left: 15%;
     margin-right: 15%;
+    margin-bottom: 2%;
     min-width: fit-content;
     display: flex;
     justify-content: center;
     max-width: 60%;
     max-height: 60%;
-    /* max-width: 800px;
-    margin-top: 0 auto; */
     border-radius: 8px;
     text-align: center;
     align-items: center;
