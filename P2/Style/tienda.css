@@ -96,13 +96,29 @@ h1 {
     color: black; /* Color del texto del precio */
 }
 
-.productos a {
+.productos form {
     display: block;
     text-align: center;
     padding: 10px;
     text-decoration: none;
-    background-color: #5e17eb; /* Color de fondo del enlace */
-    color: #fff; /* Color del texto del enlace */
+    /* background-color: #5e17eb;  */
+    color: #fff; 
     border-radius: 4px;
+    /* transition: background-color 0.3s ease; Efecto de transición al pasar el ratón */
+}
+
+input {
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
     transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
+    background-color: #5e17eb; 
+    color: #fff; 
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+input:hover {
+    background-color: #cb6ce6;
 }

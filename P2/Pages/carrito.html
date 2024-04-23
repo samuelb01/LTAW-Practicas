@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Funkoverse</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+    <link rel="stylesheet" href="../Style/carrito.css">
+</head>
+<body>
+    <header>
+        <div class="cabecera-bienvenida">
+            <img id="icono-cabecera" src="../Images/icono-FunkoVerse_recortado.png" alt="">
+        </div>
+        <div class="naveg">
+            <nav>
+                <a href="../Pages/tienda.html">Home</a>
+                <a href=>Categorías</a>
+                <a href="../Pages/login.html">Login</a>
+                <a href="../Pages/carrito.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+    <div class="contenedor">
+        <div id="formulario">
+            <form action="/pedido" method="get">
+                Dirección de envío:
+                <input type="text" name="address"/>
+                <p></p>
+                Nñumero de tarjeta de crédito:
+                <input type="text" name="tarjeta"/>
+                <p></p>
+                <input type="submit" value="Formalizar pedido"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
