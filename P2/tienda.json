@@ -1,49 +1,49 @@
 {
-    "productos": [
-        {
-            "nombre": "The Nightmare Before Christmas - Sally",
-            "descripcion": "Figura Sally",
-            "precio": "15.00",
-            "stock": "8"
-        },
-        {
-            "nombre": "The Nightmare Before Christmas - Pumpkin King",
-            "descripcion": "Figura Pumpkin King",
-            "precio": "15.00",
-            "stock": "8"
-        },
-        {
-            "nombre": "The Nightmare Before Christmas - Oogie Boogie",
-            "descripcion": "Figura Oogie Boogie",
-            "precio": "15.00",
-            "stock": "8"
-        }
-    ],
-    "usuarios": [
-        {
-            "nombre_usuario": "root",
-            "nombre_real": "YoSoyroot",
-            "mail": "yosoyroot@gmail.com",
-            "password": "YoSoyroot"
-        },
-        {
-            "nombre_usuario": "saamu28",
-            "nombre_real": "Samuel Bellon",
-            "mail": "samuelb@gmail.com",
-            "password": "HolaSoySamuel"
-        }
-    ],
-    "pedidos": [
-        {
-            "nombre_usuario": "saamu28",
-            "address": {
-                "calle": "Mi casa",
-                "numero": "120",
-                "piso": "2",
-                "puerta": ""
-            },
-            "tarjeta": 1234567891234567,
-            "lista_productos": "The Nightmare Before Christmas: Sally"
-        }
-    ]
+  "productos": [
+    {
+      "nombre": "The Nightmare Before Christmas - Sally",
+      "descripcion": "Figura Sally",
+      "precio": "15.00",
+      "stock": "8"
+    },
+    {
+      "nombre": "The Nightmare Before Christmas - Pumpkin King",
+      "descripcion": "Figura Pumpkin King",
+      "precio": "15.00",
+      "stock": "8"
+    },
+    {
+      "nombre": "The Nightmare Before Christmas - Oogie Boogie",
+      "descripcion": "Figura Oogie Boogie",
+      "precio": "15.00",
+      "stock": "8"
+    }
+  ],
+  "usuarios": [
+    {
+      "nombre_usuario": "root",
+      "nombre_real": "YoSoyroot",
+      "mail": "yosoyroot@gmail.com",
+      "password": "YoSoyroot"
+    },
+    {
+      "nombre_usuario": "saamu28",
+      "nombre_real": "Samuel Bellon",
+      "mail": "samuelb@gmail.com",
+      "password": "HolaSoySamuel"
+    }
+  ],
+  "pedidos": [
+    {
+      "nombre_usuario": "saamu28",
+      "address": {
+        "calle": "Mi casa",
+        "numero": "120",
+        "piso": "2",
+        "puerta": ""
+      },
+      "tarjeta": 1234567891234567,
+      "lista_productos": "The Nightmare Before Christmas: Sally"
+    }
+  ]
 }
