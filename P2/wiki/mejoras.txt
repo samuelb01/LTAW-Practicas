@@ -15,10 +15,3 @@ El nombre aparece en todas las páginas
 Se puede reaizar el logout
 
 
-Probar a poner en la pags de los productos a la izuquierda de todo el logo en vez de encima
-
-
-
-
-Quiero que el user haga login, y si no está registrado en el
-json que se registre, si esta registrado

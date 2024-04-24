@@ -79,7 +79,6 @@ body {
     background-repeat: repeat;
     background-size: 180px; 
 
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -99,13 +98,13 @@ h1 {
     color: black;
 }
 
-p {
+.contenedor p {
     text-align: center;
     color: black;
     font-size: large;
 }
 
-a {
+.contenedor a {
     display: block;
     text-align: center;
     padding: 10px;
@@ -117,6 +116,6 @@ a {
     margin: auto;
 }
 
-a:hover {
+.contenedor a:hover {
     background-color: #cb6ce6;
 }
