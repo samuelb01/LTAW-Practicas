@@ -50,7 +50,7 @@
     },
     {
       "nombre": "One Piece - TonyTony Chopper",
-      "descripcion": "Roronoa Zoro es el legendario espadachín de la tripulación de los Sombrero de Paja. ¡Quiere que le ayudes a reencontrarse con su tripulación!",
+      "descripcion": "Después de comerse una fruta del diablo, el reno TonyTony Chopper se convirtió en el querido médico de los Sombrero de Paja. ¡Ayúdale a reunirse con sus compañeros!",
       "precio": "15.00",
       "stock": "8"
     },
@@ -85,13 +85,19 @@
       "nombre_real": "Samuel Bellon",
       "mail": "samuelb@gmail.com",
       "password": "HolaSoySamuel"
+    },
+    {
+      "nombre_usuario": "pepe",
+      "nombre_real": "eppepepe alonoso",
+      "mail": "pepe@gmail.com",
+      "password": "pepe2"
     }
   ],
   "pedidos": [
     {
       "nombre_usuario": "saamu28",
       "address": "Calle aleatoria 140 2B",
-      "tarjeta": 1234567891234567,
+      "tarjeta": "1234567891234567",
       "lista_productos": "The Nightmare Before Christmas: Sally"
     }
   ]

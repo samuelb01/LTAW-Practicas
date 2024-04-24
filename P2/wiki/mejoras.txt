@@ -9,6 +9,8 @@ Si el user y la contra no existen te orece navegar en anoinimo o registrarte, lo
 
 Añadido el favicon
 
+Página ya son dinámica (no se si es especificación o mejora)
+
 
 Probar a poner en la pags de los productos a la izuquierda de todo el logo en vez de encima
 

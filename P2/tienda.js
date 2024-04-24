@@ -241,7 +241,7 @@ const server = http.createServer((req, res) => {
 
                 data = data.replace('<!-- HOJA DE ESTILO -->', '<link rel="stylesheet" href="'+estilo_producto+'">');
                 data = data.replace('<!-- IMAGEN CODIGO -->', '<div class="imagen" onmouseover="cambiarImagen(this, \'' + producto_sin_caja + '\')" onmouseout="restaurarImagen(this, \'' + producto_caja + '\')">');
-                data = data.replace('<!-- IMAGEN -->', '<img src="../Images/PumpkinKing-box.png" alt="' + nombre_producto.split(' - ')[1].replace(/ /g, "") + '-box">');
+                data = data.replace('<!-- IMAGEN -->', '<img src="' + producto_caja + '" alt="' + nombre_producto.split(' - ')[1].replace(/ /g, "") + '-box">');
 
                 //-- Envía del rescurso procesado
                 content_type = 'text/html';
