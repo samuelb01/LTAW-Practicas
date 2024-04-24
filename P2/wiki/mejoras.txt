@@ -14,4 +14,5 @@ Página ya son dinámica (no se si es especificación o mejora)
 El nombre aparece en todas las páginas
 Se puede reaizar el logout
 
-
+No se si es mejora o no, pero cuando le de a comprar se añade a l cookie carrito o algo así el producto
+    carrito=producto1:producto2;

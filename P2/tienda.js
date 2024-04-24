@@ -364,6 +364,7 @@ const server = http.createServer((req, res) => {
                 data = data.toString();
                 data = data.replace("TITULO_PAGINA_PRODUCTO", nombre_producto.split(' - ')[1]);
                 data = data.replace("NOMBRE_PRODUCTO", nombre_producto);
+                data = data.replace("value=NOMBRE_PRODUCTO", 'value="' + nombre_producto + '"');
                 data = data.replace("DESCRIPCION_PRODUCTO", descripcion_producto);
                 data = data.replace("PRECIO_PRODUCTO", precio_producto);
 

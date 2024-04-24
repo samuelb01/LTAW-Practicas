@@ -63,7 +63,10 @@
     
             <div class="precio">
                 <p>PRECIO: PRECIO_PRODUCTO€</p>
-                <a href="#">Comprar</a>
+                <form action="/producto" method="get">
+                    <input type="hidden" name="nombre_producto" value=NOMBRE_PRODUCTO>
+                    <input type="submit" value="Añadir al carrito">
+                </form>
             </div>
 
             <div class="boton-retorno">
