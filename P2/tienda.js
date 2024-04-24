@@ -10,7 +10,7 @@ const PORT = 9090;
 //-- Nombre de las paginas a leer y enviar
 const pagina_error = fs.readFileSync('./Pages/pagina-error.html', 'utf8');
 const FORMULARIO_LOGIN = './Pages/login.html';
-const LOGIN_CORRECTO = './Pages/login-correcto.html';
+const PAGINA_AVISO = './Pages/pagina-aviso.html';
 const LOGIN_NO_CORRECTO = './Pages/login-no-correcto.html';
 const PAGINA_PRODUCTOS = './Pages/pagina-producto.html';
 const PAGINA_LOGOUT = './pages/logout.html';
@@ -137,14 +137,13 @@ const server = http.createServer((req, res) => {
     if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
         if (user) {
 
-            leerFichero(LOGIN_CORRECTO, (err, data) => {
+            leerFichero(PAGINA_AVISO, (err, data) => {
                 if (err) {
                     code_404(res)
                 } else {
                     data = data.toString();
-                    data = data.replace("HAS INICIADO SESIÓN CORRECTAMENTE", "YA HAS INICIADO SESIÓN")
-                    data = data.replace("Bienvenido:", "Sigue navegando por el FunkoVerse")
-                    data = data.replace("NOMBRE", user);
+                    data = data.replace("AVISO", "YA HAS INICIADO SESIÓN");
+                    data = data.replace("AVISO_CUERPO", "Sigue navegando por el FunkoVerse " + user);
 
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -173,12 +172,13 @@ const server = http.createServer((req, res) => {
             //-- Si el usuario no xiste se pide que se registre o si prefiere seguir navegando
             if (element.nombre_usuario == username) {
                 if (element.password == password) {  //-- Contraseña correcta
-                    leerFichero(LOGIN_CORRECTO, (err, data) => {
+                    leerFichero(PAGINA_AVISO, (err, data) => {
                         if (err) {
                             code_404(res)
                         } else {
                             data = data.toString();
-                            data = data.replace("NOMBRE", username);
+                            data = data.replace("AVISO", "¡Has iniciado sesión correctamente!");
+                            data = data.replace("AVISO_CUERPO", "Bienvenido: " + username);
 
                             //-- Se asigna la cookie correpondiente al usuario logeado
                             res.setHeader('Set-cookie', "user=" + username)
@@ -242,15 +242,40 @@ const server = http.createServer((req, res) => {
                 // Eliminar la cookie de usuario estableciéndola con un valor vacío y un tiempo de expiración pasado
                 res.setHeader('Set-Cookie', 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;');
 
-                console.log('EN TOERIA HAS ENTRADO');
-
                 //-- Envío del rescurso procesado
                 content_type = 'text/html';
                 code_200(res, data, content_type, user);
             }
         });
 
-    } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
+    } else if (myURL.pathname == '/addCarrito') {  //-- Añadir al carrito
+        
+        //-- El usuario debe estar registrado, por lo que la cookie user debe estar definida
+        if (user) {
+
+            //-- Añadir cookie carrito
+
+        } else {  //-- No se añade nada al carrito
+
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace
+    
+                    //-- Envío del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
+            // <!-- <p>ADVERTENCIA</p> -->
+
+        }
+
+    }
+    else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
 
         // Elementos para registar
         //username = myURL.searchParams.get('username');
@@ -275,13 +300,13 @@ const server = http.createServer((req, res) => {
         fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
 
         // Página de registro exitoso
-        leerFichero(LOGIN_CORRECTO, (err, data) => {
+        leerFichero(PAGINA_AVISO, (err, data) => {
             if (err) {
                 code_404(res);
             } else {
                 data = data.toString();
-                data = data.replace("HAS INICIADO SESIÓN CORRECTAMENTE", "PEDIDO REALIZADO CON ÉXITO");
-                data = data.replace("Bienvenido: NOMBRE", "¡Gracias por confiar en nosotros!");
+                data = data.replace("AVISO", "PEDIDO REALIZADO CON ÉXITO");
+                data = data.replace("AVISO_CUERPO", "¡Gracias por confiar en nosotros!");
         
                 //-- Envío del rescurso procesado
                 content_type = 'text/html';
@@ -315,12 +340,13 @@ const server = http.createServer((req, res) => {
         fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
 
         // Página de registro exitoso
-        leerFichero(LOGIN_CORRECTO, (err, data) => {
+        leerFichero(PAGINA_AVISO, (err, data) => {
             if (err) {
                 code_404(res);
             } else {
                 data = data.toString();
-                data = data.replace("NOMBRE", username)
+                data = data.replace("AVISO", "Se ha registrado correctamente");
+                data = data.replace("AVISO_CUERPO", "Bienvenido al FunkoVerse " + username)
 
                 //-- Se asigna la cookie correpondiente al usuario logeado
                 res.setHeader('Set-cookie', "user=" + username)
