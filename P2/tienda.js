@@ -48,7 +48,8 @@ function code_404 (res) {
 }
 
 //-- Función para mandar 200 OK
-function code_200 (res, data, content_type) {
+function code_200 (res, data, content_type, user) {
+    data = writeUser(data, user)
     res.statusCode = 200;         // Código de respuesta
     res.statusMessage = "OK";    // Mensaje asociado al código
     res.setHeader('Content-Type', content_type);
@@ -92,19 +93,25 @@ function getUsuario(req) {
 
 //-- Función para escribir el usuario en la cabecera
 function writeUser(data, user) {
-    
+
     // Buscar el índice donde se encuentra el marcador de posición del usuario en el HTML
     const index = data.indexOf("<!-- <p>USUARIO</p> -->");
+    console.log('EL INDICEDEE:   ' + index);
 
     // Si se encuentra el marcador de posición del usuario
     if (index !== -1) {
+
         // Si hay un usuario, reemplazar el marcador de posición con el nombre de usuario
         if (user) {
+
             const usuarioHTML = `<p>${user}</p>`;
             data = data.slice(0, index) + usuarioHTML + data.slice(index);
+
         } else {
+
             // Si no hay un usuario, eliminar el marcador de posición
             data = data.slice(0, index) + data.slice(index + "<!-- <p>USUARIO</p> -->".length);
+
         }
     }
 
@@ -121,7 +128,7 @@ const server = http.createServer((req, res) => {
     let user = getUsuario(req);
     
     //-- Declarar el Content-Type y recurso
-    if (myURL.pathname.endsWith('/login.html')) {
+    if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
         if (user) {
 
             leerFichero(LOGIN_CORRECTO, (err, data) => {
@@ -135,7 +142,7 @@ const server = http.createServer((req, res) => {
 
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
-                    code_200(res, data, content_type);
+                    code_200(res, data, content_type, user);
                 }
             });
 
@@ -145,7 +152,7 @@ const server = http.createServer((req, res) => {
             enviarFicheros(recurso, content_type);
         }
 
-    } else if (myURL.pathname == '/procesar') {  //-- Login
+    } else if (myURL.pathname == '/procesar') {  //-- Se ha usado el input de la página login.html
 
         //-- Quiero comprobar si el usuario está en el json
         //-- Primero obtengo de la solicitud el valor del nombrey la contraseña
@@ -172,7 +179,7 @@ const server = http.createServer((req, res) => {
 
                             //-- Envío del rescurso procesado
                             content_type = 'text/html';
-                            code_200(res, data, content_type);
+                            code_200(res, data, content_type, user);
                         }
                     });
 
@@ -186,7 +193,7 @@ const server = http.createServer((req, res) => {
 
                             //-- Envío del rescurso procesado
                             content_type = 'text/html';
-                            code_200(res, data, content_type);
+                            code_200(res, data, content_type, user);
                         }
                     });
                 }
@@ -207,14 +214,13 @@ const server = http.createServer((req, res) => {
     
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
-                    code_200(res, data, content_type);
+                    code_200(res, data, content_type, user);
                 }
             });
         }
 
 
     } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
-        content_type = "text/html";
 
         // Elementos para registar
         //username = myURL.searchParams.get('username');
@@ -247,13 +253,13 @@ const server = http.createServer((req, res) => {
                 data = data.replace("HAS INICIADO SESIÓN CORRECTAMENTE", "PEDIDO REALIZADO CON ÉXITO");
                 data = data.replace("Bienvenido: NOMBRE", "¡Gracias por confiar en nosotros!");
         
-                //-- Envía del rescurso procesado
+                //-- Envío del rescurso procesado
                 content_type = 'text/html';
-                code_200(res, data, content_type);
+                code_200(res, data, content_type, user);
             }
         });
 
-    } else if (myURL.pathname == '/registrar') {
+    } else if (myURL.pathname == '/registrar') {  //-- REGISTRO NUEVO USUARIO
         content_type = "text/html";
 
         // Elementos para registar
@@ -288,10 +294,14 @@ const server = http.createServer((req, res) => {
 
                 //-- Se asigna la cookie correpondiente al usuario logeado
                 res.setHeader('Set-cookie', "user=" + username)
+
+                //-- En este caso particular declaro el user, ya que si se realiaz un registro exitoso, la cookie con
+                //-- el usuario se va a mandar
+                user = username;
                 
                 //-- Envía del rescurso procesado
                 content_type = 'text/html';
-                code_200(res, data, content_type);
+                code_200(res, data, content_type, user);
             }
         });
 
@@ -333,7 +343,7 @@ const server = http.createServer((req, res) => {
 
                 //-- Envía del rescurso procesado
                 content_type = 'text/html';
-                code_200(res, data, content_type);
+                code_200(res, data, content_type, user);
             }
         });
 
@@ -376,15 +386,14 @@ const server = http.createServer((req, res) => {
 
                 if (user) {
                     data = data.toString();
-                    data = writeUser(data, user);
                     
                     //-- Envía del rescurso procesado
                     content_type = 'text/html';
-                    code_200(res, data, content_type);
+                    code_200(res, data, content_type, user);
                 } else {
                     //-- Envía del rescurso procesado
                     content_type = 'text/html';
-                    code_200(res, data, content_type);
+                    code_200(res, data, content_type, user);
                 }
                
             }
@@ -401,8 +410,10 @@ const server = http.createServer((req, res) => {
             if (err) {
                 code_404(res);
             } else {
+                console.log('Soy el user que buscas¿¿¿¿!!¿!¿!');
+                writeUser(data, user)
                 //-- Envía del rescurso procesado
-                code_200(res, data, content_type);
+                code_200(res, data, content_type, user);
             }
         });
     };
