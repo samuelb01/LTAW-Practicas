@@ -56,21 +56,83 @@ function code_200 (res, data, content_type) {
     res.end();
 }
 
+//-- Analizar la cookie y devolver el nombre de usuario si existe, si no, será null
+function getUsuario(req) {
+
+    //-- Leer cookie recibida
+    const cookie = req.headers.cookie;
+
+    // Si hay cookie se busca si existe el usuario
+    if (cookie) {
+
+        //-- Array con todos los pares nombre-valor
+        let pares = cookie.split(';')
+
+        //-- Guardar usuario
+        let user;
+
+        //-- Recorremos el array pares para ver si existe la cooki user y obtener su valor
+        pares.forEach(element => {
+            
+            //-- Nombres y valores
+            let [nombre, valor] = element.split('=');
+
+            //-- Leer el usuario si el nombre de la cookie es 'user'
+            if (nombre == 'user') {
+                user = valor;
+            }
+
+        });
+
+        //-- Se devuelve user si está asignada, si no se devuelve null
+        return user || null;
+
+    }
+}
+
 //-- Se crea el servidor
 const server = http.createServer((req, res) => {
     const myURL = new URL(req.url, 'http://' + req.headers['host']);
 
     console.log("Petición recibida:", myURL.pathname);
+
+    //-- Obtener las cookies
+    let user = getUsuario(req);
+    console.log("USER: " + user);
     
     //-- Declarar el Content-Type y recurso
-    if (myURL.pathname == '/procesar') {  //-- Login
+    if (myURL.pathname.endsWith('/login.html')) {
+        if (user) {
+
+            leerFichero(LOGIN_CORRECTO, (err, data) => {
+                if (err) {
+                    code_404(res)
+                } else {
+                    data = data.toString();
+                    data = data.replace("HAS INICIADO SESIÓN CORRECTAMENTE", "YA HAS INICIADO SESIÓN")
+                    data = data.replace("Bienvenido:", "Sigue navegando por el FunkoVerse")
+                    data = data.replace("NOMBRE", user);
+
+                    //-- Envío del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type);
+                }
+            });
+
+        } else {
+            content_type = "text/html";
+            recurso = './Pages/' + myURL.pathname.split('/').pop();
+            enviarFicheros(recurso, content_type);
+        }
+
+    } else if (myURL.pathname == '/procesar') {  //-- Login
 
         //-- Quiero comprobar si el usuario está en el json
         //-- Primero obtengo de la solicitud el valor del nombrey la contraseña
         username = myURL.searchParams.get('username');
         password = myURL.searchParams.get('password');
 
-        usuario_existe = false; //-- Condición para solicitar o no al usuario que se registre en la tienda
+        usuario_registrado = false; //-- Condición para solicitar o no al usuario que se registre en la tienda
 
         usuarios.forEach(element => { //-- Itera sobre todos los usuarios para ver si está registrado
             //-- Si el usuario introducido y la contraseña coinciden, se da como login correcto
@@ -84,6 +146,9 @@ const server = http.createServer((req, res) => {
                         } else {
                             data = data.toString();
                             data = data.replace("NOMBRE", username);
+
+                            //-- Se asigna la cookie correpondiente al usuario logeado
+                            res.setHeader('Set-cookie', "user=" + username)
 
                             //-- Envío del rescurso procesado
                             content_type = 'text/html';
@@ -106,12 +171,12 @@ const server = http.createServer((req, res) => {
                     });
                 }
 
-                usuario_existe = true;  //-- El usuario exiiste en la bse de datos -> No se pregunta por registro
+                usuario_registrado = true;  //-- El usuario exiiste en la bse de datos -> No se pregunta por registro
             }
         });
 
         //-- Si el usuario no exisitia en la base de datos se pregunta por regitro
-        if (usuario_existe == false) {
+        if (usuario_registrado == false) {
             leerFichero(LOGIN_NO_CORRECTO, (err, data) => {
                 if (err) {
                     code_404(res);
@@ -119,6 +184,9 @@ const server = http.createServer((req, res) => {
                     data = data.toString();
                     data = data.replace("AVISO", "USUARIO NO REGISTRADO");
                     data = data.replace("CUERPO-AVISO", "Puede decidir si registrarse o seguir navegando como invitado:"); 
+
+                    //-- Se asigna la cookie correpondiente al usuario logeado
+                    res.setHeader('Set-cookie', "user=" + username)
     
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -126,7 +194,7 @@ const server = http.createServer((req, res) => {
                 }
             });
         }
-        
+
 
     } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
         content_type = "text/html";
