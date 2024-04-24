@@ -10,9 +10,10 @@ const PORT = 9090;
 //-- Nombre de las paginas a leer y enviar
 const pagina_error = fs.readFileSync('./Pages/pagina-error.html', 'utf8');
 const FORMULARIO_LOGIN = './Pages/login.html';
-const LOGIN_CORRECTO = './Pages/login-correcto.html'
-const LOGIN_NO_CORRECTO = './Pages/login-no-correcto.html'
-const PAGINA_PRODUCTOS = './Pages/pagina-producto.html'
+const LOGIN_CORRECTO = './Pages/login-correcto.html';
+const LOGIN_NO_CORRECTO = './Pages/login-no-correcto.html';
+const PAGINA_PRODUCTOS = './Pages/pagina-producto.html';
+const PAGINA_LOGOUT = './pages/logout.html';
 
 
 //-- Cargo el archivo .json y creo la estructura de la tienda
@@ -96,7 +97,6 @@ function writeUser(data, user) {
 
     // Buscar el índice donde se encuentra el marcador de posición del usuario en el HTML
     const index = data.indexOf("<!-- <p>USUARIO</p> -->");
-    console.log('EL INDICEDEE:   ' + index);
 
     // Si se encuentra el marcador de posición del usuario
     if (index !== -1) {
@@ -107,10 +107,16 @@ function writeUser(data, user) {
             const usuarioHTML = `<p>${user}</p>`;
             data = data.slice(0, index) + usuarioHTML + data.slice(index);
 
+            // Si el usuario ha iniciado sesión hay que cambiar la página de login por logout
+            data = data.replace("<a href=\"../Pages/login.html\">Login</a>", "<a href=\"../Pages/logout.html\">Logout</a>")
+
         } else {
 
             // Si no hay un usuario, eliminar el marcador de posición
             data = data.slice(0, index) + data.slice(index + "<!-- <p>USUARIO</p> -->".length);
+
+            // Si el usuario no ha iniciado sesión hay que cambiar la página de logout por login
+            data = data.replace("<a href=\"../Pages/logout.html\">Logout</a>", "<a href=\"../Pages/login.html\">Login</a>")
 
         }
     }
@@ -177,6 +183,9 @@ const server = http.createServer((req, res) => {
                             //-- Se asigna la cookie correpondiente al usuario logeado
                             res.setHeader('Set-cookie', "user=" + username)
 
+                            //-- Se pasa el usuario para poder imprimirlo en la cabecera
+                            user = username;
+
                             //-- Envío del rescurso procesado
                             content_type = 'text/html';
                             code_200(res, data, content_type, user);
@@ -219,6 +228,27 @@ const server = http.createServer((req, res) => {
             });
         }
 
+
+    } else if (myURL.pathname.endsWith('/logout.html')) {  //-- LOGOUT
+
+        leerFichero(PAGINA_LOGOUT, (err, data) => {
+            if (err) {
+                code_404(res);
+            } else {
+                data = data.toString();
+
+                user = null;
+
+                // Elimino la cookie de user
+                res.setHeader('Set-Cookie', 'user=');
+
+                console.log('EN TOERIA HAS ENTRADO');
+
+                //-- Envío del rescurso procesado
+                content_type = 'text/html';
+                code_200(res, data, content_type, user);
+            }
+        });
 
     } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
 
@@ -285,7 +315,7 @@ const server = http.createServer((req, res) => {
         fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
 
         // Página de registro exitoso
-        fs.readFile(LOGIN_CORRECTO, (err, data) => {
+        leerFichero(LOGIN_CORRECTO, (err, data) => {
             if (err) {
                 code_404(res);
             } else {
@@ -379,7 +409,7 @@ const server = http.createServer((req, res) => {
 
     } else if (myURL.pathname == '/' || myURL.pathname.endsWith('/tienda.html')) {
 
-        fs.readFile('./Pages/tienda.html', (err, data) => {
+        leerFichero('./Pages/tienda.html', (err, data) => {
             if (err) {
                 code_404(res);
             } else {
@@ -410,8 +440,6 @@ const server = http.createServer((req, res) => {
             if (err) {
                 code_404(res);
             } else {
-                console.log('Soy el user que buscas¿¿¿¿!!¿!¿!');
-                writeUser(data, user)
                 //-- Envía del rescurso procesado
                 code_200(res, data, content_type, user);
             }

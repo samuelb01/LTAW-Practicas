@@ -93,6 +93,12 @@
       "address": "Calle aleatoria 140 2B",
       "tarjeta": "1234567891234567",
       "lista_productos": "The Nightmare Before Christmas: Sally"
+    },
+    {
+      "nombre_usuario": "",
+      "address": "dadas",
+      "tarjeta": "dada",
+      "lista productos": ""
     }
   ]
 }
