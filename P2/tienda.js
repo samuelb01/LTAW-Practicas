@@ -253,7 +253,32 @@ const server = http.createServer((req, res) => {
         //-- El usuario debe estar registrado, por lo que la cookie user debe estar definida
         if (user) {
 
+            // Nombre del producto para buscarlo en la base de datos
+            nombre_producto = myURL.searchParams.get('nombre_producto');
+
+            leerFichero('./Pages/tienda.html', (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+    
+                    res.setHeader('Set-cookie', "carrito=" + nombre_producto)
+
+                    //-- Envío del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
             //-- Añadir cookie carrito
+            // carrito=producto1:producto2:producto3
+            // Si el getuser se carga la cookie debería generarse sol
+
+            // Actualizar lista del json con el pedido, iterando hasta que coincida el nombre de usuario
+
+            // Debería cargar la pagina principal?
+
+
 
         } else {  //-- No se añade nada al carrito
 
