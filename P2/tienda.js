@@ -239,8 +239,8 @@ const server = http.createServer((req, res) => {
 
                 user = null;
 
-                // Elimino la cookie de user
-                res.setHeader('Set-Cookie', 'user=');
+                // Eliminar la cookie de usuario estableciéndola con un valor vacío y un tiempo de expiración pasado
+                res.setHeader('Set-Cookie', 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;');
 
                 console.log('EN TOERIA HAS ENTRADO');
 

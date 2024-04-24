@@ -85,6 +85,12 @@
       "nombre_real": "Samuel Bellon",
       "mail": "samuelb@gmail.com",
       "password": "HolaSoySamuel"
+    },
+    {
+      "nombre_usuario": "pepe",
+      "nombre_real": "asdjkllasd",
+      "mail": "abjkbd",
+      "password": "pepe2"
     }
   ],
   "pedidos": [
