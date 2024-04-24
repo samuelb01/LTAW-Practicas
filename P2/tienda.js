@@ -203,6 +203,39 @@ const server = http.createServer((req, res) => {
             }
         });
 
+    }else if (myURL.pathname == '/producto') { // Crear la página de los productos
+        // Crear la página de los productos
+        content_type = "text/html"
+
+        // Nombre del producto para buscarlo en la base de datos
+        nombre_producto = myURL.searchParams.get('nombre_producto');
+
+        productos.forEach(element => {
+            if (element.nombre == nombre_producto) {
+                descripcion_producto = element.descripcion;
+                precio_producto = element.precio;
+            }
+        });
+
+        // Páginad e
+        leerFichero(PAGINA_PRODUCTOS, (err, data) => {
+            if (err) {
+                code_404(res);
+            } else {
+                data = data.toString();
+                data = data.replace("NOMBRE_PRODUCTO", nombre_producto);
+                data = data.replace("DESCRIPCION_PRODUCTO", descripcion_producto);
+                data = data.replace("PRECIO_PRODUCTO", precio_producto);
+
+                data = data.replace('<!-- HOJA DE ESTILO -->', '<link rel="stylesheet" href="../Style/style-TheNightmareBeforeChristmas.css">')
+                data = data.replace('<!-- IMAGEN CODIGO -->', '<div class="imagen" onmouseover="cambiarImagen(this, '+'../Images/PumpkinKing.png'+')" onmouseout="restaurarImagen(this, '+'../Images/PumpkinKing-box.png'+')">')
+                data = data.replace('<!-- IMAGEN -->', '<img src="../Images/PumpkinKing-box.png" alt="PumpkinKing-box">')
+
+                //-- Envía del rescurso procesado
+                code_200(res, data);
+            }
+        });
+
     } else if (myURL.pathname.endsWith('.png')) {  //--PNG
         content_type = 'image/png';
         recurso = './Images/' + myURL.pathname.split('/').pop();
@@ -241,22 +274,12 @@ const server = http.createServer((req, res) => {
 
     function enviarFicheros(recurso) {
         leerFichero(recurso, (err, data) => {
-
             if (err) {
-                res.statusCode = 404;             // Código de respuesta
-                res.statusMessage = "Not Found"; // Mensaje asociado al código
-                res.setHeader('Content-Type', 'text/html');
-                res.write(pagina_error);
-                res.end();
+                code_404(res);
             } else {
                 //-- Envía del rescurso procesado
-                res.statusCode = 200;         // Código de respuesta
-                res.statusMessage = "OK";    // Mensaje asociado al código
-                res.setHeader('Content-Type', content_type);
-                res.write(data);
-                res.end();
+                code_200(res, data);
             }
-
         });
     };
 });
