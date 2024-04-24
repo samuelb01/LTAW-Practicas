@@ -98,7 +98,6 @@ const server = http.createServer((req, res) => {
 
     //-- Obtener las cookies
     let user = getUsuario(req);
-    console.log("USER: " + user);
     
     //-- Declarar el Content-Type y recurso
     if (myURL.pathname.endsWith('/login.html')) {
