@@ -90,6 +90,27 @@ function getUsuario(req) {
     }
 }
 
+//-- Función para escribir el usuario en la cabecera
+function writeUser(data, user) {
+    
+    // Buscar el índice donde se encuentra el marcador de posición del usuario en el HTML
+    const index = data.indexOf("<!-- <p>USUARIO</p> -->");
+
+    // Si se encuentra el marcador de posición del usuario
+    if (index !== -1) {
+        // Si hay un usuario, reemplazar el marcador de posición con el nombre de usuario
+        if (user) {
+            const usuarioHTML = `<p>${user}</p>`;
+            data = data.slice(0, index) + usuarioHTML + data.slice(index);
+        } else {
+            // Si no hay un usuario, eliminar el marcador de posición
+            data = data.slice(0, index) + data.slice(index + "<!-- <p>USUARIO</p> -->".length);
+        }
+    }
+
+    return data;
+}
+
 //-- Se crea el servidor
 const server = http.createServer((req, res) => {
     const myURL = new URL(req.url, 'http://' + req.headers['host']);
@@ -355,7 +376,7 @@ const server = http.createServer((req, res) => {
 
                 if (user) {
                     data = data.toString();
-                    data = data.replace("<!-- <p>USUARIO</p> -->", user)
+                    data = writeUser(data, user);
                     
                     //-- Envía del rescurso procesado
                     content_type = 'text/html';
