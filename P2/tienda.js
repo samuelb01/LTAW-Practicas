@@ -262,7 +262,8 @@ const server = http.createServer((req, res) => {
                     code_404(res);
                 } else {
                     data = data.toString();
-                    data = data.replace
+                    data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE")
+                    data = data.replace("AVISO_CUERPO", "Debe iniciar sesión para poder comprar")
     
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -375,7 +376,7 @@ const server = http.createServer((req, res) => {
             }
         });
 
-        //-- Decidir el css a utilizar de la carpeta "Style"S
+        //-- Decidir el css a utilizar de la carpeta "Style"
         estilo_producto = "../Style/style-" + nombre_producto.split(' - ')[0].replace(/ /g, "") + ".css";
 
         //-- Decidir las imágenes a utilizar de la carpeta "Images"
