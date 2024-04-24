@@ -11,6 +11,8 @@ Añadido el favicon
 
 Página ya son dinámica (no se si es especificación o mejora)
 
+El nombre aparece solo en la página principal (de momento)
+
 
 Probar a poner en la pags de los productos a la izuquierda de todo el logo en vez de encima
 

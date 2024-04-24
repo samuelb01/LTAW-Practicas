@@ -6,18 +6,43 @@ header {
     box-shadow: -1px -1px 6px 0 #cb6ce6, 4px 4px 16px 2px #5e17eb;
 }
 
-#icono-cabecera {
-    max-width: 25%;
-    max-height: 25%;
-}
-
 .cabecera-bienvenida {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100%;
     font-size: 27px;
     color: #cb6ce6;
     padding-bottom: 1%;
+}
+
+#primera-columna {
+    flex: 1;
+}
+
+#columna-central {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tercera-columna {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#icono-cabecera {
+    max-width: 45%;
+    max-height: 45%;
+}
+
+#usuario {
+    margin-left: 2px;
 }
 
 .naveg {
@@ -45,7 +70,6 @@ header {
 .naveg a:hover {
     color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
 }
-
 body {
     font-family: Arial, sans-serif; 
 

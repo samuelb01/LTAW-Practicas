@@ -1,19 +1,62 @@
 header {
     font-family: 'Luckiest Guy';
+    padding: 1%;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: -1px -1px 6px 0 #cb6ce6, 4px 4px 16px 2px #5e17eb;
 }
 
+.cabecera-bienvenida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 27px;
+    color: #cb6ce6;
+    padding-bottom: 1%;
+}
+
+#primera-columna {
+    flex: 1;
+}
+
+#columna-central {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tercera-columna {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#icono-cabecera {
+    max-width: 45%;
+    max-height: 45%;
+}
+
+#usuario {
+    margin-left: 2px;
+}
+
 .naveg {
-    padding: 1%;
+    border-color: #fff;
+    border-top: #5e17eb;
+    border-style: solid;
+    margin: 0;
+    padding-top: 1%;
 }
 
 .naveg nav{
     display: flex; /* Utilizar flexbox para alinear los elementos en fila */
     justify-content: space-between; /* Distribuir los elementos equitativamente en la fila */
     margin: 0 10%; /* Añadir espacio horizontal entre los enlaces */
-    font-size: large;
 }
 
 .naveg a {

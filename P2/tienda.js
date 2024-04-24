@@ -183,9 +183,6 @@ const server = http.createServer((req, res) => {
                     data = data.toString();
                     data = data.replace("AVISO", "USUARIO NO REGISTRADO");
                     data = data.replace("CUERPO-AVISO", "Puede decidir si registrarse o seguir navegando como invitado:"); 
-
-                    //-- Se asigna la cookie correpondiente al usuario logeado
-                    res.setHeader('Set-cookie', "user=" + username)
     
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -267,6 +264,9 @@ const server = http.createServer((req, res) => {
             } else {
                 data = data.toString();
                 data = data.replace("NOMBRE", username)
+
+                //-- Se asigna la cookie correpondiente al usuario logeado
+                res.setHeader('Set-cookie', "user=" + username)
                 
                 //-- Envía del rescurso procesado
                 content_type = 'text/html';
@@ -321,7 +321,7 @@ const server = http.createServer((req, res) => {
         recurso = './Images/' + myURL.pathname.split('/').pop();
         enviarFicheros(recurso, content_type);
 
-    } else if (myURL.pathname.endsWith('.html')) {  //-- HTML
+    } else if (myURL.pathname.endsWith('.html') && !myURL.pathname.endsWith('/tienda.html')) {  //-- HTML
         content_type = 'text/html'
         recurso = './Pages/' + myURL.pathname.split('/').pop();
         enviarFicheros(recurso, content_type);
@@ -346,10 +346,28 @@ const server = http.createServer((req, res) => {
         recurso = './Images/favicon-FunkoVerse.ico'; 
         enviarFicheros(recurso, content_type);
 
-    } else if (myURL.pathname == '/') {
-        content_type = 'text/html';
-        recurso = './Pages/tienda.html';
-        enviarFicheros(recurso, content_type);
+    } else if (myURL.pathname == '/' || myURL.pathname.endsWith('/tienda.html')) {
+
+        fs.readFile('./Pages/tienda.html', (err, data) => {
+            if (err) {
+                code_404(res);
+            } else {
+
+                if (user) {
+                    data = data.toString();
+                    data = data.replace("<!-- <p>USUARIO</p> -->", user)
+                    
+                    //-- Envía del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type);
+                } else {
+                    //-- Envía del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type);
+                }
+               
+            }
+        });
 
     } else {  // Valor por defecto -> HTML - error.html
         content_type = 'text/html';
