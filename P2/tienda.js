@@ -221,19 +221,27 @@ const server = http.createServer((req, res) => {
             }
         });
 
-        // Páginad e
+        //-- Decidir el css a utilizar de la carpeta "Style"S
+        estilo_producto = "../Style/style-" + nombre_producto.split(' - ')[0].replace(/ /g, "") + ".css";
+
+        //-- Decidir las imágenes a utilizar de la carpeta "Images"
+        producto_caja = "../Images/" + nombre_producto.split(' - ')[1].replace(/ /g, "") + "-box.png";
+        producto_sin_caja = "../Images/" + nombre_producto.split(' - ')[1].replace(/ /g, "") + ".png";
+
+        // Se crea la página de lo productos
         leerFichero(PAGINA_PRODUCTOS, (err, data) => {
             if (err) {
                 code_404(res);
             } else {
                 data = data.toString();
+                data = data.replace("TITULO_PAGINA_PRODUCTO", nombre_producto.split(' - ')[1]);
                 data = data.replace("NOMBRE_PRODUCTO", nombre_producto);
                 data = data.replace("DESCRIPCION_PRODUCTO", descripcion_producto);
                 data = data.replace("PRECIO_PRODUCTO", precio_producto);
 
-                data = data.replace('<!-- HOJA DE ESTILO -->', '<link rel="stylesheet" href="../Style/style-TheNightmareBeforeChristmas.css">')
-                data = data.replace('<!-- IMAGEN CODIGO -->', '<div class="imagen" onmouseover="cambiarImagen(this, '+'../Images/PumpkinKing.png'+')" onmouseout="restaurarImagen(this, '+'../Images/PumpkinKing-box.png'+')">')
-                data = data.replace('<!-- IMAGEN -->', '<img src="../Images/PumpkinKing-box.png" alt="PumpkinKing-box">')
+                data = data.replace('<!-- HOJA DE ESTILO -->', '<link rel="stylesheet" href="'+estilo_producto+'">');
+                data = data.replace('<!-- IMAGEN CODIGO -->', '<div class="imagen" onmouseover="cambiarImagen(this, \'' + producto_sin_caja + '\')" onmouseout="restaurarImagen(this, \'' + producto_caja + '\')">');
+                data = data.replace('<!-- IMAGEN -->', '<img src="../Images/PumpkinKing-box.png" alt="' + nombre_producto.split(' - ')[1].replace(/ /g, "") + '-box">');
 
                 //-- Envía del rescurso procesado
                 content_type = 'text/html';
@@ -264,6 +272,11 @@ const server = http.createServer((req, res) => {
     } else if (myURL.pathname.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
         recurso = './Images/' + myURL.pathname.split('/').pop();
+        enviarFicheros(recurso, content_type);
+
+    } else if (myURL.pathname.endsWith('favicon.ico')) {
+        content_type = 'image/x-icon';
+        recurso = './Images/favicon-FunkoVerse.ico'; 
         enviarFicheros(recurso, content_type);
 
     } else if (myURL.pathname == '/') {

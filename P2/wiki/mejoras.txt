@@ -7,6 +7,7 @@ Si el usuer existe pero la contrra no, te dice qu es incorrecta
 Si el user está bien y la contra tambien te manda a una pagina de login corecto
 Si el user y la contra no existen te orece navegar en anoinimo o registrarte, lo que modiofica el json con un nuevo usuario
 
+Añadido el favicon
 
 
 Probar a poner en la pags de los productos a la izuquierda de todo el logo en vez de encima
