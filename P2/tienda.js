@@ -33,7 +33,7 @@ function leerFichero(fichero, callback) {
             console.error("ERROR al leer el archivo");
             callback(err, null);
         } else {
-            // console.log(`Lectura completada`);
+            console.log(`Lectura completada`);
             callback(null, data);
         }
     });
@@ -161,7 +161,7 @@ function writeUser(data, user) {
 const server = http.createServer((req, res) => {
     const myURL = new URL(req.url, 'http://' + req.headers['host']);
 
-    // console.log("Petición recibida:", myURL.pathname);
+    console.log("Petición recibida:", myURL.pathname);
 
     //-- Obtener las cookies
     let user = getUsuario(req);  //-- USUARIO
@@ -172,7 +172,7 @@ const server = http.createServer((req, res) => {
         productos = carrito.split(':')
     }
     
-    console.log(productos);
+    //  console.log(productos);
 
     //-- Declarar el Content-Type y recurso
     if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
@@ -280,8 +280,15 @@ const server = http.createServer((req, res) => {
 
                 user = null;
 
-                // Eliminar la cookie de usuario estableciéndola con un valor vacío y un tiempo de expiración pasado
-                res.setHeader('Set-Cookie', 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;');
+                // Eliminar la cookie de usuario y de carrito estableciéndola con un valor vacío y un tiempo de expiración pasado
+                if (carrito) {
+                    res.setHeader('Set-Cookie', [
+                        'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;',
+                        'carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+                    ]);
+                } else  {
+                    res.setHeader('Set-Cookie', 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;');
+                }
 
                 //-- Envío del rescurso procesado
                 content_type = 'text/html';
@@ -307,24 +314,13 @@ const server = http.createServer((req, res) => {
                         res.setHeader('Set-cookie', "carrito=" + carrito + ":" + nombre_producto)
                     } else {
                         res.setHeader('Set-cookie', "carrito=" + nombre_producto)
-                    }
-                    
+                    }             
 
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
                     code_200(res, data, content_type, user);
                 }
             });
-
-            //-- Añadir cookie carrito
-            // carrito=producto1:producto2:producto3
-            // Si el getuser se carga la cookie debería generarse sol
-
-            // Actualizar lista del json con el pedido, iterando hasta que coincida el nombre de usuario
-
-            // Debería cargar la pagina principal?
-
-
 
         } else {  //-- No se añade nada al carrito
 
@@ -433,7 +429,7 @@ const server = http.createServer((req, res) => {
             }
         });
 
-    } else if (myURL.pathname == '/producto') { // Crear la página de los productos
+    } else if (myURL.pathname == '/producto') { //-- CREAR PÁGINA DE LOS PRODUCTOS
         // Crear la página de los productos
         content_type = "text/html"
 

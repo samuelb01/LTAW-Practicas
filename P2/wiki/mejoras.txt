@@ -19,6 +19,7 @@ Se puede reaizar el logout
 No se si es mejora o no, pero cuando le de a comprar se añade a l cookie carrito o algo así el producto
     carrito=producto1:producto2;
 
+Se borra el carrito cuando haces logout
 
-    El registto yu no sale el nombre, arreglar
-    Creo que deja de salir cuando alado la cookie del carrito, mirar bien eso
+El registto yu no sale el nombre, arreglar
+Creo que deja de salir cuando alado la cookie del carrito, mirar bien eso
