@@ -107,8 +107,13 @@ body {
 #productos_carrito {
     display: inline-block;
     padding: 10px;
+    padding-top: 0px;
     margin-bottom: 20px;
-    border-style: solid;
-    border-color: #5e17eb;
-    border-radius: 5px;
+    border-style:groove;
+    border: #5e17eb 3px dashed;
+}
+
+#productos_carrito_titulo{
+    font-family: 'Luckiest Guy';
+    color: #5e17eb;
 }
