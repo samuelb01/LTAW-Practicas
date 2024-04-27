@@ -383,41 +383,59 @@ const server = http.createServer((req, res) => {
     } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
 
         // Elementos para registar
-        //username = myURL.searchParams.get('username');
         address = myURL.searchParams.get('address');
         tarjeta = myURL.searchParams.get('tarjeta');
-        //lista_productos = myURL.searchParams.get('lista_productos');
 
-        const nuevoPedido = {
-            "nombre_usuario": "",
-            "address": address,
-            "tarjeta": tarjeta,
-            "lista productos": ""
-        };
-          
-        // Agregar el nuevo objeto al array de usuarios
-        pedidos.push(nuevoPedido);
-        
-        // Convertir el objeto JavaScript de nuevo a formato JSON
-        const nuevoJsonTienda = JSON.stringify(tienda, null, 2);
-        
-        // Escribir el JSON actualizado de vuelta al archivo
-        fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
+        if (address != '' && tarjeta != '') {  //-- Datos bien introducidos, se guarda pedido
 
-        // Página de registro exitoso
-        leerFichero(PAGINA_AVISO, (err, data) => {
-            if (err) {
-                code_404(res);
-            } else {
-                data = data.toString();
-                data = data.replace("AVISO", "PEDIDO REALIZADO CON ÉXITO");
-                data = data.replace("AVISO_CUERPO", "¡Gracias por confiar en nosotros!");
-        
-                //-- Envío del rescurso procesado
-                content_type = 'text/html';
-                code_200(res, data, content_type, user);
-            }
-        });
+            const nuevoPedido = {
+                "nombre_usuario": user,
+                "address": address,
+                "tarjeta": tarjeta,
+                "lista productos": productos 
+            };
+              
+            // Agregar el nuevo objeto al array de usuarios
+            pedidos.push(nuevoPedido);
+            
+            // Convertir el objeto JavaScript de nuevo a formato JSON
+            const nuevoJsonTienda = JSON.stringify(tienda, null, 2);
+            
+            // Escribir el JSON actualizado de vuelta al archivo
+            fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
+    
+            // Página de registro exitoso
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace("AVISO", "PEDIDO REALIZADO CON ÉXITO");
+                    data = data.replace("AVISO_CUERPO", "¡Gracias por confiar en nosotros!");
+            
+                    //-- Envío del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
+        } else {  //-- Datos mal introducidos, se muestra un aviso
+
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE")
+                    data = data.replace("AVISO_CUERPO", "Algunos de los campos del pedido están vacios")
+    
+                    //-- Envío del recurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
+        }
 
     } else if (myURL.pathname == '/registrar') {  //-- REGISTRO NUEVO USUARIO
         content_type = "text/html";
