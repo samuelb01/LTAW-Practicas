@@ -167,6 +167,13 @@ const server = http.createServer((req, res) => {
     let user = getUsuario(req);  //-- USUARIO
     let carrito = getCarrito(req);  //-- CARRITO
     
+    //-- Si la cookie carrito existe se crea un array con los productos
+    if (carrito) {
+        productos = carrito.split(':')
+    }
+    
+    console.log(productos);
+
     //-- Declarar el Content-Type y recurso
     if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
         if (user) {

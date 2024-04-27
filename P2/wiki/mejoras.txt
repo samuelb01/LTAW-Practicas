@@ -20,6 +20,5 @@ No se si es mejora o no, pero cuando le de a comprar se añade a l cookie carrit
     carrito=producto1:producto2;
 
 
-
     El registto yu no sale el nombre, arreglar
     Creo que deja de salir cuando alado la cookie del carrito, mirar bien eso
