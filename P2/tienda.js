@@ -14,6 +14,7 @@ const PAGINA_AVISO = './Pages/pagina-aviso.html';
 const LOGIN_NO_CORRECTO = './Pages/login-no-correcto.html';
 const PAGINA_PRODUCTOS = './Pages/pagina-producto.html';
 const PAGINA_LOGOUT = './pages/logout.html';
+const PAGINA_CARRITO = './Pages/carrito.html';
 
 
 //-- Cargo el archivo .json y creo la estructura de la tienda
@@ -171,8 +172,6 @@ const server = http.createServer((req, res) => {
     if (carrito) {
         productos = carrito.split(':')
     }
-    
-    //  console.log(productos);
 
     //-- Declarar el Content-Type y recurso
     if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
@@ -194,7 +193,7 @@ const server = http.createServer((req, res) => {
 
         } else {
             content_type = "text/html";
-            recurso = './Pages/' + myURL.pathname.split('/').pop();
+            recurso = './Pages/login.html';
             enviarFicheros(recurso, content_type);
         }
 
@@ -337,13 +336,51 @@ const server = http.createServer((req, res) => {
                     code_200(res, data, content_type, user);
                 }
             });
-
-            // <!-- <p>ADVERTENCIA</p> -->
-
+            
         }
 
-    }
-    else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
+    } else if(myURL.pathname.endsWith('/carrito.html')) { //-- SE CARGA LA PÁGINA DEL CARRITO
+
+        if (user) {  //-- Si hay usuario se muestra el carrito
+
+            leerFichero(PAGINA_CARRITO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+
+                    productos_a_mostrar = ''
+                    productos.forEach(element => {
+                        productos_a_mostrar += element + '<br>';
+                    });
+    
+                    data = data.replace('<!-- LISTA_PRODUCTOS_MOSTRAR -->', productos_a_mostrar);
+
+                    //-- Envío del recurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
+        } else {  //-- Si no hay usuario se muestra mensaje de aviso
+
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE")
+                    data = data.replace("AVISO_CUERPO", "Debe iniciar sesión para poder acceder al carrito")
+    
+                    //-- Envío del recurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
+
+        }
+        
+    } else if (myURL.pathname == '/pedido') {  //-- Realiza el pedidio
 
         // Elementos para registar
         //username = myURL.searchParams.get('username');
