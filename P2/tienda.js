@@ -33,7 +33,7 @@ function leerFichero(fichero, callback) {
             console.error("ERROR al leer el archivo");
             callback(err, null);
         } else {
-            console.log(`Lectura completada`);
+            // console.log(`Lectura completada`);
             callback(null, data);
         }
     });
@@ -73,7 +73,7 @@ function getUsuario(req) {
         //-- Guardar usuario
         let user;
 
-        //-- Recorremos el array pares para ver si existe la cooki user y obtener su valor
+        //-- Recorremos el array pares para ver si existe la cookie user y obtener su valor
         pares.forEach(element => {
             
             //-- Nombres y valores
@@ -88,6 +88,39 @@ function getUsuario(req) {
 
         //-- Se devuelve user si está asignada, si no se devuelve null
         return user || null;
+
+    }
+}
+
+function getCarrito(req) {
+
+    //-- Leer cookie recibida
+    const cookie = req.headers.cookie;
+
+    // Si hay cookie se busca si existe el carrito
+    if (cookie) {
+
+        //-- Array con todos los pares nombre-valor
+        let pares = cookie.split(';')
+
+        //-- Guardar usuario
+        let carrito;
+
+        //-- Recorremos el array pares para ver si existe la cookie carrito y obtener su valor
+        pares.forEach(element => {
+            
+            //-- Nombres y valores
+            let [nombre, valor] = element.split('=');
+
+            //-- Leer el carrito si el nombre de la cookie es 'carrito'
+            if (nombre.trim() == 'carrito') {
+                carrito = valor;
+            }
+
+        });
+
+        //-- Se devuelve user si está asignada, si no se devuelve null
+        return carrito || null;
 
     }
 }
@@ -124,14 +157,15 @@ function writeUser(data, user) {
     return data;
 }
 
-//-- Se crea el servidor
+///////////////////////////////////////////////////////////////////////-- SE CREA EL SERVIDOR
 const server = http.createServer((req, res) => {
     const myURL = new URL(req.url, 'http://' + req.headers['host']);
 
-    console.log("Petición recibida:", myURL.pathname);
+    // console.log("Petición recibida:", myURL.pathname);
 
     //-- Obtener las cookies
-    let user = getUsuario(req);
+    let user = getUsuario(req);  //-- USUARIO
+    let carrito = getCarrito(req);  //-- CARRITO
     
     //-- Declarar el Content-Type y recurso
     if (myURL.pathname.endsWith('/login.html')) {  //-- Se accede a la página login.html
@@ -248,7 +282,7 @@ const server = http.createServer((req, res) => {
             }
         });
 
-    } else if (myURL.pathname == '/addCarrito') {  //-- Añadir al carrito
+    } else if (myURL.pathname == '/addCarrito') {  //-- AÑADIR AL CARRITO
         
         //-- El usuario debe estar registrado, por lo que la cookie user debe estar definida
         if (user) {
@@ -262,7 +296,12 @@ const server = http.createServer((req, res) => {
                 } else {
                     data = data.toString();
     
-                    res.setHeader('Set-cookie', "carrito=" + nombre_producto)
+                    if (carrito) {
+                        res.setHeader('Set-cookie', "carrito=" + carrito + ":" + nombre_producto)
+                    } else {
+                        res.setHeader('Set-cookie', "carrito=" + nombre_producto)
+                    }
+                    
 
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -290,7 +329,7 @@ const server = http.createServer((req, res) => {
                     data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE")
                     data = data.replace("AVISO_CUERPO", "Debe iniciar sesión para poder comprar")
     
-                    //-- Envío del rescurso procesado
+                    //-- Envío del recurso procesado
                     content_type = 'text/html';
                     code_200(res, data, content_type, user);
                 }
@@ -377,8 +416,8 @@ const server = http.createServer((req, res) => {
                 //-- Se asigna la cookie correpondiente al usuario logeado
                 res.setHeader('Set-cookie', "user=" + username)
 
-                //-- En este caso particular declaro el user, ya que si se realiaz un registro exitoso, la cookie con
-                //-- el usuario se va a mandar
+                //-- En este caso particular declaro el user, ya que si se realiza un registro exitoso, la cookie con
+                //-- el usuario se va a tener que mandar
                 user = username;
                 
                 //-- Envía del rescurso procesado
@@ -387,7 +426,7 @@ const server = http.createServer((req, res) => {
             }
         });
 
-    }else if (myURL.pathname == '/producto') { // Crear la página de los productos
+    } else if (myURL.pathname == '/producto') { // Crear la página de los productos
         // Crear la página de los productos
         content_type = "text/html"
 
