@@ -65,6 +65,7 @@ header {
     text-align: center;
     color: #5e17eb; /* Color del texto del enlace */
     transition: color 0.3s ease; /* Efecto de transición al pasar el ratón */
+    text-decoration: none;
 }
 
 .naveg a:hover {
