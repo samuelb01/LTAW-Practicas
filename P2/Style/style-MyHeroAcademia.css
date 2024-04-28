@@ -173,3 +173,22 @@ h1 {
 .boton-retorno {
     padding-bottom: 10px;
 }
+
+input[type="submit"], .contenedor a {
+    font-family: 'Luckiest Guy';
+    background-color: #5e17eb; 
+    border: 2px solid #e9ecef; 
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+input[type="submit"]:hover, .contenedor a:hover {
+    background-color: #cb6ce6;  
+    color: #fff;
+}

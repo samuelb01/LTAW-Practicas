@@ -427,14 +427,14 @@ const server = http.createServer((req, res) => {
                 } else {
                     data = data.toString();
                     data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE")
-                    data = data.replace("AVISO_CUERPO", "Algunos de los campos del pedido están vacios")
+                    data = data.replace("AVISO_CUERPO", "Algunos de los campos del pedido están vacíos")
     
                     //-- Envío del recurso procesado
                     content_type = 'text/html';
                     code_200(res, data, content_type, user);
                 }
             });
-
+            
         }
 
     } else if (myURL.pathname == '/registrar') {  //-- REGISTRO NUEVO USUARIO
