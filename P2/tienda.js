@@ -299,9 +299,20 @@ const server = http.createServer((req, res) => {
         
         //-- El usuario debe estar registrado, por lo que la cookie user debe estar definida
         if (user) {
+            
 
             // Nombre del producto para buscarlo en la base de datos
             nombre_producto = myURL.searchParams.get('nombre_producto');
+
+           
+
+            productos.forEach(element => {
+                if (element.nombre == nombre_producto) {
+                    stock_producto = parseInt(element.stock);
+                }
+            });
+
+            console.log('EL STOCKKKKK ->>>>>>>>' + stock_producto);
 
             leerFichero('./Pages/tienda.html', (err, data) => {
                 if (err) {

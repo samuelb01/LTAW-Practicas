@@ -21,5 +21,11 @@ No se si es mejora o no, pero cuando le de a comprar se añade a l cookie carrit
 
 Se borra el carrito cuando haces logout
 
-El registto yu no sale el nombre, arreglar
-Creo que deja de salir cuando alado la cookie del carrito, mirar bien eso
+
+
+--> TO DO
+    -> Control de stock
+        -> Si añado al carrito y no queda stock salta ventana de aviso
+        -> Si proceso el pedido resto 1 al valor de stock
+
+    -> Autocompletado de búsqueda
