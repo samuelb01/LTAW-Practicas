@@ -123,4 +123,7 @@ input[type="submit"]:hover, .contenedor a:hover {
     background-color: #cb6ce6;  
 }
 
+#mensaje_login_error {
+    color: red;
+}
 

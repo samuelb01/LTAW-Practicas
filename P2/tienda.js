@@ -170,7 +170,7 @@ const server = http.createServer((req, res) => {
     
     //-- Si la cookie carrito existe se crea un array con los productos
     if (carrito) {
-        productos = carrito.split(':')
+        productos_carrito = carrito.split(':')
     }
 
     //-- Declarar el Content-Type y recurso
@@ -238,7 +238,7 @@ const server = http.createServer((req, res) => {
                             code_404(res);
                         } else {
                             data = data.toString();
-                            data = data.replace("Accede al FunkoVerse", "Contraseña incorrecta");
+                            data = data.replace("<p id=\"mensaje_login_error\"></p>", "<p id=\"mensaje_login_error\">CONTRASEÑA INCORRECTA</p>");
 
                             //-- Envío del rescurso procesado
                             content_type = 'text/html';
@@ -299,38 +299,69 @@ const server = http.createServer((req, res) => {
         
         //-- El usuario debe estar registrado, por lo que la cookie user debe estar definida
         if (user) {
-            
 
             // Nombre del producto para buscarlo en la base de datos
             nombre_producto = myURL.searchParams.get('nombre_producto');
 
-           
-
             productos.forEach(element => {
                 if (element.nombre == nombre_producto) {
-                    stock_producto = parseInt(element.stock);
+                    stock_producto = element.stock;
                 }
             });
 
-            console.log('EL STOCKKKKK ->>>>>>>>' + stock_producto);
+            if (stock_producto > 0) {  //-- HAY STOCK -> SE AÑADE AL CARRITO
 
-            leerFichero('./Pages/tienda.html', (err, data) => {
-                if (err) {
-                    code_404(res);
-                } else {
-                    data = data.toString();
-    
-                    if (carrito) {
-                        res.setHeader('Set-cookie', "carrito=" + carrito + ":" + nombre_producto)
+                leerFichero(PAGINA_AVISO, (err, data) => {
+                    if (err) {
+                        code_404(res);
                     } else {
-                        res.setHeader('Set-cookie', "carrito=" + nombre_producto)
-                    }             
+                        data = data.toString();
+                        data = data.replace("AVISO", "PRODUCTO AÑADIDO AL CARRITO");
+                        data = data.replace("AVISO_CUERPO", "Puede volcer a la tienda para seguir comprando :)");
 
-                    //-- Envío del rescurso procesado
-                    content_type = 'text/html';
-                    code_200(res, data, content_type, user);
-                }
-            });
+                        //-- Se reduce el número de stock del producto
+                        productos.forEach((element, index) => {
+                            if (element.nombre == nombre_producto) {
+                                tienda.productos[index].stock = stock_producto - 1;
+                            }
+                        });
+
+                        // Convertir el objeto JavaScript de nuevo a formato JSON
+                        const nuevoJsonTienda = JSON.stringify(tienda, null, 2);
+                        
+                        // Escribir el JSON actualizado de vuelta al archivo
+                        fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
+        
+                        //-- Si el carrito ya existe se concatenan los valores
+                        if (carrito) {
+                            res.setHeader('Set-cookie', "carrito=" + carrito + ":" + nombre_producto)
+                        } else {
+                            res.setHeader('Set-cookie', "carrito=" + nombre_producto)
+                        }             
+    
+                        //-- Envío del rescurso procesado
+                        content_type = 'text/html';
+                        code_200(res, data, content_type, user);
+                    }
+                });
+
+            } else {  //-- NO QUEDA STOCK DEL PRODUCTO
+
+                leerFichero(PAGINA_AVISO, (err, data) => {
+                    if (err) {
+                        code_404(res)
+                    } else {
+
+                        data = data.toString();
+                        data = data.replace("AVISO", "PRODUCTO AGOTADO");
+                        data = data.replace("AVISO_CUERPO", "Lo sentimos mucho :(");
+
+                        //-- Envío del rescurso procesado
+                        content_type = 'text/html';
+                        code_200(res, data, content_type, user);
+                    }
+                });
+            }
 
         } else {  //-- No se añade nada al carrito
 
@@ -354,24 +385,45 @@ const server = http.createServer((req, res) => {
 
         if (user) {  //-- Si hay usuario se muestra el carrito
 
-            leerFichero(PAGINA_CARRITO, (err, data) => {
-                if (err) {
-                    code_404(res);
-                } else {
-                    data = data.toString();
+            //-- Si existe la cookie carrito se muestran los elementos
+            if (carrito) {
 
-                    productos_a_mostrar = ''
-                    productos.forEach(element => {
-                        productos_a_mostrar += element + '<br>';
-                    });
+                leerFichero(PAGINA_CARRITO, (err, data) => {
+                    if (err) {
+                        code_404(res);
+                    } else {
+                        data = data.toString();
     
-                    data = data.replace('<!-- LISTA_PRODUCTOS_MOSTRAR -->', productos_a_mostrar);
+                        productos_a_mostrar = ''
+                        productos_carrito.forEach(element => {
+                            productos_a_mostrar += element + '<br>';
+                        });
+        
+                        data = data.replace('<!-- LISTA_PRODUCTOS_MOSTRAR -->', productos_a_mostrar);
+    
+                        //-- Envío del recurso procesado
+                        content_type = 'text/html';
+                        code_200(res, data, content_type, user);
+                    }
+                });
 
-                    //-- Envío del recurso procesado
-                    content_type = 'text/html';
-                    code_200(res, data, content_type, user);
-                }
-            });
+            } else { //-- Si no hay cookie carrito se muestra en blanco
+
+                leerFichero(PAGINA_CARRITO, (err, data) => {
+                    if (err) {
+                        code_404(res);
+                    } else {
+                        data = data.toString();
+        
+                        data = data.replace('<!-- LISTA_PRODUCTOS_MOSTRAR -->', 'El carrito está vacío');
+    
+                        //-- Envío del recurso procesado
+                        content_type = 'text/html';
+                        code_200(res, data, content_type, user);
+                    }
+                });
+
+            }
 
         } else {  //-- Si no hay usuario se muestra mensaje de aviso
 
@@ -403,10 +455,10 @@ const server = http.createServer((req, res) => {
                 "nombre_usuario": user,
                 "address": address,
                 "tarjeta": tarjeta,
-                "lista productos": productos 
+                "lista productos": productos_carrito 
             };
               
-            // Agregar el nuevo objeto al array de usuarios
+            // Agregar el nuevo objeto al array de pedidos
             pedidos.push(nuevoPedido);
             
             // Convertir el objeto JavaScript de nuevo a formato JSON
@@ -423,6 +475,9 @@ const server = http.createServer((req, res) => {
                     data = data.toString();
                     data = data.replace("AVISO", "PEDIDO REALIZADO CON ÉXITO");
                     data = data.replace("AVISO_CUERPO", "¡Gracias por confiar en nosotros!");
+
+                    //-- Se borra la cookie del carrito
+                    res.setHeader('Set-Cookie', 'carrito=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;');
             
                     //-- Envío del rescurso procesado
                     content_type = 'text/html';
@@ -504,6 +559,7 @@ const server = http.createServer((req, res) => {
 
         productos.forEach(element => {
             if (element.nombre == nombre_producto) {
+                console.log('VAS A CONSEGUYIR LA DESCRIPCION');
                 descripcion_producto = element.descripcion;
                 precio_producto = element.precio;
             }

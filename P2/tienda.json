@@ -4,73 +4,73 @@
       "nombre": "The Nightmare Before Christmas - Sally",
       "descripcion": "Sally ha escapado del Dr. Fniklestein y está buscando unirse a tu colección de Pesadilla Antes de Navidad. Ayúdala a reunirse con Jack y sus amigos.",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "The Nightmare Before Christmas - Pumpkin King",
       "descripcion": "What's this? ¡El Rey Calabaza ha traído Halloween a Halloween Town! ¡Si quieres pasar un momento escalofriantemente divertido no hay nadie mejor que Jack Skellington como el Rey Calabaza!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "The Nightmare Before Christmas - Oogie Boogie",
       "descripcion": "Ten cuidado con Oogie Boogie. Le come la envidia de que Jack tenga la atención de todo Halloween Town. Ha tirado los dados para ver si se convierte en el nuevo rey de la ciudad. Una colección de Pesadilla Antes de Navidad sin Oogie Boogie hará que todo el mundo diga, 'I can't believe my eyes!'",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 6
     },
     {
       "nombre": "My Hero Academia - Shoto Todoroki",
       "descripcion": "Shoto Todoroki es uno de los estudiantes de la U.A. High School, sigue aprendiendo como usar sus poderes de hielo y fuego para poder enfrentarse a la Liga de Villanos. ¡Ayúdale a conseguirlo añadiéndolo a tu colección!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 7
     },
     {
       "nombre": "My Hero Academia - Izuku Midoriya",
       "descripcion": "Izuku Midoriya nació sin poderes, pero gracias al mítico héroe All Might heredó el poder del One For All. Gracias a su entrenamiento ha conseguido ponerse a la altura de sus compañeros, aunque aún le queda un duro camino. ¿Le ayudarás a conseguirlo?",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "My Hero Academia - Ochaco Uraraka",
       "descripcion": "Ochaco Uraraka se enconde bajo la identidad de Uravity para salvar al mundo, aunque sigue siendo una estudiante a superheroína. ¡Añádela a tu colección para ayudarla a desarrollar sus poderes!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "One Piece - Monkey. D. Luffy",
       "descripcion": "Monkey. D. Luffy está listo para convertirse en el próximo Rey de los Piratas, para ello tiene que encontrar el legendario tesoro del anterior Rey de los Piratas, el One Piece. Toda colección necesita un capitán, hazte con él.",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "One Piece - Roronoa Zoro",
       "descripcion": "Roronoa Zoro es el legendario espadachín de la tripulación de los Sombrero de Paja. ¡Quiere que le ayudes a reencontrarse con su tripulación!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "One Piece - TonyTony Chopper",
       "descripcion": "Después de comerse una fruta del diablo, el reno TonyTony Chopper se convirtió en el querido médico de los Sombrero de Paja. ¡Ayúdale a reunirse con sus compañeros!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "Naruto - Tobi",
       "descripcion": "Obito Uchiha se esconde bajo una máscara y el nombre de Tobi, planeando la creación del mundo ideal, como Madara planeó antes que él. ¡Ayúdale con su plan añadiendolo a tu colección de Naruto!",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "Naruto - Orochimaru",
       "descripcion": "Muchos villanos buscan la inmortalidad por su miedo a la muerte, pero Orochimaru lo hace simplemente por aumentar su conocimento. Orochimaru puede tanto controlar a las serpientes como convertirse en una para deslizarse hasta tu colección de Naruto.",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     },
     {
       "nombre": "Naruto - Deidara",
       "descripcion": "Prepárate para la batalla con Deidara, uno de los miembros más fuertes de Akatsuki. Él ya está listo para unirse a tu colección, ¿tú lo estás?",
       "precio": "15.00",
-      "stock": "8"
+      "stock": 8
     }
   ],
   "usuarios": [
@@ -90,9 +90,13 @@
   "pedidos": [
     {
       "nombre_usuario": "saamu28",
-      "address": "Calle aleatoria 140 2B",
-      "tarjeta": "1234567891234567",
-      "lista_productos": "The Nightmare Before Christmas: Sally"
+      "address": "calle hola campus de Fuenlabrada",
+      "tarjeta": "1356 1356 1738 1387",
+      "lista productos": [
+        "The Nightmare Before Christmas - Oogie Boogie",
+        "My Hero Academia - Shoto Todoroki",
+        "The Nightmare Before Christmas - Oogie Boogie"
+      ]
     }
   ]
 }

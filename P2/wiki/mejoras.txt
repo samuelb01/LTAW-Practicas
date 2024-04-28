@@ -21,11 +21,10 @@ No se si es mejora o no, pero cuando le de a comprar se añade a l cookie carrit
 
 Se borra el carrito cuando haces logout
 
-
+-> Control de stock
+        -> Si añado al carrito y no queda stock salta ventana de aviso
+        -> Si añado al carrito resto 1 al valor de stock
+        -> Cuando añado al carrito salta página de aviso que confirma el haber añadido al carrito
 
 --> TO DO
-    -> Control de stock
-        -> Si añado al carrito y no queda stock salta ventana de aviso
-        -> Si proceso el pedido resto 1 al valor de stock
-
     -> Autocompletado de búsqueda
