@@ -17,16 +17,6 @@ const PAGINA_LOGOUT = './pages/logout.html';
 const PAGINA_CARRITO = './Pages/carrito.html';
 
 
-//-- Cargo el archivo .json y creo la estructura de la tienda
-const tienda_json = fs.readFileSync('./tienda.json', 'utf-8');
-const tienda = JSON.parse(tienda_json);
-
-//-- Info de la tienda
-let productos = tienda.productos;
-let usuarios = tienda.usuarios;
-let pedidos = tienda.pedidos;
-
-
 //-- Función para leer archivos
 function leerFichero(fichero, callback) {
     fs.readFile(fichero, (err, data) => {
@@ -163,6 +153,15 @@ const server = http.createServer((req, res) => {
     const myURL = new URL(req.url, 'http://' + req.headers['host']);
 
     console.log("Petición recibida:", myURL.pathname);
+
+    //-- Cargo el archivo .json y creo la estructura de la tienda
+    const tienda_json = fs.readFileSync('./tienda.json', 'utf-8');
+    const tienda = JSON.parse(tienda_json);
+
+    //-- Info de la tienda
+    let productos = tienda.productos;
+    let usuarios = tienda.usuarios;
+    let pedidos = tienda.pedidos;
 
     //-- Obtener las cookies
     let user = getUsuario(req);  //-- USUARIO
