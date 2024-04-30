@@ -28,3 +28,6 @@ Se borra el carrito cuando haces logout
 
 --> TO DO
     -> Autocompletado de búsqueda
+    -> Cargar tienda en cada solicitud, porque siemrpre usa el stock antiguo
+
+--> Revisar que la pagina de soliciitud de registro no tiene estrilo los enlaces
