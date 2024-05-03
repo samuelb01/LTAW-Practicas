@@ -1,0 +1,25 @@
+-------- TO DO --------
+    -> Programa servidor en Node.js
+    -> Cuando usuario se conecte al servidor MENSAJE BIENVENIDA
+        '-> Solo lo ve el
+        '-> También mensaje al resto de usuarios de nuevo usuario
+    -> Intercambio de datos entre clinte y servidor con socket.io
+    -> Aplicación web se desarrollará con express
+    -> Cada mensaje enviado por usuarios será visible para el resto (servidor se encarga)
+    -> Comandos especiales
+        '-> Respuesta solo visible por el usuario que lo escriba
+        '-> '/help': Muestra lista con todos los comandos soportados
+        '-> '/list': Devuelve nº de user conectados
+        '-> '/hello': Servidor devuelve un saludo
+        '-> '/date': Devuelve la fecha
+    -> Si server detecta mensaje que empieza por '/', lo intrepreta como comando
+    -> Mensajes que no seaan comandos sí que los reenvía al resto de clientes
+
+
+    -------- MEJORAS --------
+    -> POSIBLES MEJORAS
+        '-> Sonidos cuando se recibe mensaje
+        '-> Nicknames de los usuarios
+        '-> Añadir funcionalidad "El usuario x está escribiendo..."
+        '-> Mostrar usuarios conectados
+        '-> Mensajes directos entre usuarios
