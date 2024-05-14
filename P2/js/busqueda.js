@@ -12,7 +12,7 @@ caja_busqueda.oninput = () => {
     //-- Crear objeto para hacer las peticiones AJAX
     const m = new XMLHttpRequest();
 
-    //-- Función de callback que se invoca cuando hay 
+    //-- Función de callback que se invoca cuando hay  
     //-- cambios en el estado de la petición
     m.onreadystatechange = () => {
 
