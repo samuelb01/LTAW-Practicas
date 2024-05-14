@@ -605,11 +605,16 @@ const server = http.createServer((req, res) => {
 
         for (let prod of productos) {
             //-- Pasar a mayúsculas
-            prodUpper = prod.nombre.toUpperCase();
+            prodU = prod.nombre.toUpperCase();
+
+            //-- Categoría y nombre del personaje
+            prodU_categoria = prodU.split(' - ')[0];
+            prodU_nombrePersonaje = prodU.split(' - ')[1];
 
             //-- Si el producto comienza por lo indicado en el parámetro
             //-- meter estre producto en el array de resultados
-            if (prodUpper.startsWith(param1)) {
+            //-- Se tiene en cuneta el nombre de la cetegoría y del producto
+            if (prodU_categoria.startsWith(param1) || prodU_nombrePersonaje.startsWith(param1)) {
                 result.push(prod);
             }
 
