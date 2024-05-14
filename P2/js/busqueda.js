@@ -28,12 +28,24 @@ caja_busqueda.oninput = () => {
                 //-- Borrar el resultado anterior
                 display.innerHTML = "";
 
-                //-- Muestro los resultados de busqueda
-                display.style.display = "block";
+                if (productos.length == 0) { //-- No hay resultados
 
-                //-- Recorrer todos los productos del objeto JSON
-                for (let prod of productos) {
-                    display.innerHTML += '<a href="/producto?nombre_producto=' + prod.nombre + '">' + prod.nombre + '</a> <br>';
+                    //-- Muestro los resultados de busqueda
+                    display.style.display = "block";
+
+                    //-- No hay resultados
+                    display.innerHTML += "<p>No se encuentran resultados</p>";
+
+                } else {
+                    
+                    //-- Muestro los resultados de busqueda
+                    display.style.display = "block";
+
+                    //-- Recorrer todos los productos del objeto JSON
+                    for (let prod of productos) {
+                        display.innerHTML += '<a href="/producto?nombre_producto=' + prod.nombre + '">' + prod.nombre + '</a> <br>';
+                    }
+
                 }
 
             } else {
@@ -57,6 +69,7 @@ caja_busqueda.oninput = () => {
         m.send()
 
     } else {
+        display.style.display = "none";
         display.innerHTML = "";
     }
 }
