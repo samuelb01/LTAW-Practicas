@@ -33,7 +33,7 @@ caja_busqueda.oninput = () => {
 
                 //-- Recorrer todos los productos del objeto JSON
                 for (let prod of productos) {
-                    display.innerHTML += prod.nombre + "<br>";
+                    display.innerHTML += '<a href="/producto?nombre_producto=' + prod.nombre + '">' + prod.nombre + '</a> <br>';
                 }
 
             } else {
