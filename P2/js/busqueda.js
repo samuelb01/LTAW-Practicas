@@ -28,9 +28,12 @@ caja_busqueda.oninput = () => {
                 //-- Borrar el resultado anterior
                 display.innerHTML = "";
 
+                //-- Muestro los resultados de busqueda
+                display.style.display = "block";
+
                 //-- Recorrer todos los productos del objeto JSON
                 for (let prod of productos) {
-                    display.innerHTML += prod.nombre;
+                    display.innerHTML += prod.nombre + "<br>";
                 }
 
             } else {
