@@ -543,7 +543,7 @@ const server = http.createServer((req, res) => {
                 //-- el usuario se va a tener que mandar
                 user = username;
                 
-                //-- Envía del rescurso procesado
+                //-- Envío del rescurso procesado
                 content_type = 'text/html';
                 code_200(res, data, content_type, user);
             }
@@ -587,12 +587,40 @@ const server = http.createServer((req, res) => {
                 data = data.replace('<!-- IMAGEN CODIGO -->', '<div class="imagen" onmouseover="cambiarImagen(this, \'' + producto_sin_caja + '\')" onmouseout="restaurarImagen(this, \'' + producto_caja + '\')">');
                 data = data.replace('<!-- IMAGEN -->', '<img src="' + producto_caja + '" alt="' + nombre_producto.split(' - ')[1].replace(/ /g, "") + '-box">');
 
-                //-- Envía del rescurso procesado
+                //-- Envío del rescurso procesado
                 content_type = 'text/html';
                 code_200(res, data, content_type, user);
             }
         });
 
+    } else if (myURL.pathname == '/productos') {  //-- Se realiza peticción de productos
+        //-- Leer los parámetros
+        let param1 = myURL.searchParams.get('param1');
+
+        param1 = param1.toUpperCase();
+
+        console.log("   Param: " + param1);
+
+        let result = [];
+
+        for (let prod of productos) {
+            //-- Pasar a mayúsculas
+            prodUpper = prod.nombre.toUpperCase();
+
+            //-- Si el producto comienza por lo indicado en el parámetro
+            //-- meter estre producto en el array de resultados
+            if (prodUpper.startsWith(param1)) {
+                result.push(prod);
+            }
+
+        }
+
+        //-- Generar la respuesta
+        content_type = "application/json"
+        data = JSON.stringify(result);
+        code_200(res, data, content_type, user);
+        
+        
     } else if (myURL.pathname.endsWith('.png')) {  //--PNG
         content_type = 'image/png';
         recurso = './Images/' + myURL.pathname.split('/').pop();
@@ -610,8 +638,8 @@ const server = http.createServer((req, res) => {
 
     } else if (myURL.pathname.endsWith('.js')) {  //--JS
         content_type = 'application/javascript';
-        recurso = './JS/' + myURL.pathname.split('/').pop();
-        enviarFicheros(recurso, content_type);v
+        recurso = './js/' + myURL.pathname.split('/').pop();
+        enviarFicheros(recurso, content_type);
 
     } else if (myURL.pathname.endsWith('.jpeg')) {  //--JPEG
         content_type = 'image/jpeg';
@@ -633,11 +661,11 @@ const server = http.createServer((req, res) => {
                 if (user) {
                     data = data.toString();
                     
-                    //-- Envía del rescurso procesado
+                    //-- Envío del rescurso procesado
                     content_type = 'text/html';
                     code_200(res, data, content_type, user);
                 } else {
-                    //-- Envía del rescurso procesado
+                    //-- Envío del rescurso procesado
                     content_type = 'text/html';
                     code_200(res, data, content_type, user);
                 }
@@ -656,7 +684,7 @@ const server = http.createServer((req, res) => {
             if (err) {
                 code_404(res);
             } else {
-                //-- Envía del rescurso procesado
+                //-- Envío del rescurso procesado
                 code_200(res, data, content_type, user);
             }
         });

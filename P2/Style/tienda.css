@@ -72,6 +72,17 @@ header {
     color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
 }
 
+#resultado-busqueda {
+    position: absolute;
+    background: red;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: max-content;
+    z-index: 1000;
+    display: block;   /* Propiedad a cambiar para que se muestre */
+    margin-top: 5px;
+}
+
 body {
     font-family: Arial, sans-serif; 
 
