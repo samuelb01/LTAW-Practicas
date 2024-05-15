@@ -67,6 +67,35 @@ io.on('connect', (socket) => {
 
             socket.broadcast.emit("rest-of-users", `${username} SE HA UNIDO AL CHAT`);
 
+        } else if (message.startsWith('/')) {  //-- COMANDOS
+
+            comando = message.split('/')[1];
+
+            //-- Gestionar comandos
+            switch (comando) {
+                case 'help':
+                  
+
+                  break;
+
+                case 'list':
+
+                    break;
+
+                case 'hello':
+                  socket.send('HOLA WUAPO');
+
+                  break;
+
+                case 'date':
+
+                    break;
+
+                default:
+                    socket.send('Comando no encontrado');
+              }
+            
+            
         } else {  //-- MENSAJE NORMAL
 
             //-- Reenviarlo a todos los clientes conectados
