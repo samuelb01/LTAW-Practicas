@@ -1,7 +1,7 @@
-//-- Crear un websocket. Se establece la conexión con el servidor
+//-- Crear un websocket. Se establece la conexión con el <servidor></servidor>
 // const socket = io();//-- Elementos del interfaz
-const button = document.getElementById("button");
 const display = document.getElementById("display");
+const msg_entry = document.getElementById("msg_entry");
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -12,9 +12,9 @@ const username = urlParams.get('username');
 let contador = 1;
 
 socket.on("connect", () => {
-  //-- Enviar mensaje inicial
-  socket.send("Mensaje inicial del Cliente!!!");
-});  
+    //-- Enviar mensaje inicial
+    socket.send("Mensaje inicial del Cliente!!!");
+});         
 
 socket.on("disconnect", ()=> {
   display.innerHTML="¡¡DESCONECTADO!!"
@@ -31,4 +31,4 @@ msg_entry.onchange = () => {
   
   //-- Borrar el mensaje actual
   msg_entry.value = "";
-}
+}    
