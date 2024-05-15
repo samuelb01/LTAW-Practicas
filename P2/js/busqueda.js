@@ -28,13 +28,15 @@ caja_busqueda.oninput = () => {
                 //-- Borrar el resultado anterior
                 display.innerHTML = "";
 
-                if (productos.length == 0) { //-- No hay resultados
+                n_prod = 0;
+
+                if (productos.length < 1) { //-- No hay resultados
 
                     //-- Muestro los resultados de busqueda
                     display.style.display = "block";
 
                     //-- No hay resultados
-                    display.innerHTML += "<p>No se encuentran resultados</p>";
+                    display.innerHTML += "No se encuentran resultados";
 
                 } else {
                     
@@ -43,7 +45,17 @@ caja_busqueda.oninput = () => {
 
                     //-- Recorrer todos los productos del objeto JSON
                     for (let prod of productos) {
-                        display.innerHTML += '<a href="/producto?nombre_producto=' + prod.nombre + '">' + prod.nombre + '</a> <br>';
+
+                        n_prod += 1
+                        display.innerHTML += '<a href="/producto?nombre_producto=' + prod.nombre + '">' + prod.nombre + '</a>';
+
+                        if (n_prod < productos.length) {
+
+                            //-- Se añade salto de página si no es último producto a mostrar
+                            display.innerHTML += "<br>";
+
+                        }
+                        
                     }
 
                 }
