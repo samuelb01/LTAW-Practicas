@@ -3,6 +3,7 @@ const socket = require('socket.io');
 const http = require('http');
 const express = require('express');
 const colors = require('colors');
+const { Socket } = require('dgram');
 
 const PUERTO = 9090;
 
@@ -58,8 +59,20 @@ io.on('connect', (socket) => {
         
         console.log(`Mensaje recibido de ${username}: ${message}`);
 
-        //-- Reenviarlo a todos los clientes conectados
-        io.send(`${username}: ${message}`);
+        //----- Gestionar tipo de mensajes y dónde mostrarlos -----
+        if (message.includes("BIENVENIDO")) {  //-- MENSAJE BIENVENIDA
+
+            //-- Solo se envía al cliente
+            socket.send(message);
+
+        } else {  //-- MENSAJE NORMAL
+
+            //-- Reenviarlo a todos los clientes conectados
+            io.send(`${username}: ${message}`);
+
+        }
+
+        
     });
 
     //-- Evento de desconexión

@@ -13,7 +13,7 @@ let contador = 1;
 
 socket.on("connect", () => {
     //-- Enviar mensaje inicial
-    socket.send([username, "Mensaje inicial del Cliente!!!"]);
+    socket.send([username, "BIENVENIDO AL CHAT " + username]);
 });         
 
 socket.on("disconnect", ()=> {
