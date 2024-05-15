@@ -54,7 +54,8 @@ io.on('connect', (socket) => {
     console.log('** NUEVA CONEXIÓN **'.yellow);
 
     //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
-    socket.on('message', ({ username, message }) => {
+    socket.on('message', ( [username=message[0], message=message[1]] ) => {
+        
         console.log(`Mensaje recibido de ${username}: ${message}`);
 
         //-- Reenviarlo a todos los clientes conectados

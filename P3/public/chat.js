@@ -13,7 +13,7 @@ let contador = 1;
 
 socket.on("connect", () => {
     //-- Enviar mensaje inicial
-    socket.send("Mensaje inicial del Cliente!!!");
+    socket.send([username, "Mensaje inicial del Cliente!!!"]);
 });         
 
 socket.on("disconnect", ()=> {
@@ -26,8 +26,9 @@ socket.on("message", (msg)=>{
 
 //-- Al apretar el botón se envía un mensaje al servidor
 msg_entry.onchange = () => {
+
     if (msg_entry.value)
-    socket.send(msg_entry.value);
+    socket.send([username, msg_entry.value]);
 
     //-- Borrar el mensaje actual
     msg_entry.value = "";
