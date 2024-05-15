@@ -7,6 +7,7 @@
     <title>TITULO_PAGINA_PRODUCTO</title>
     <!-- HOJA DE ESTILO -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+    <script src="./js/busqueda.js" defer></script>
     <script>
         function cambiarImagen(elemento, nuevaImagen) {  
             // Cambiar imagen al pasar ratón por encima
@@ -36,7 +37,11 @@
         <div class="naveg">
             <nav>
                 <a href="../Pages/tienda.html">Home</a>
-                <a href=>Categorías</a>
+                <div id="barra-busqueda">
+                    <span>🔎</span>
+                    <input type="text" id="caja-busqueda">
+                    <p id="resultado-busqueda"></p>
+                </div>
                 <a href="../Pages/login.html">Login</a>
                 <a href="../Pages/carrito.html">Carrito</a>
             </nav>

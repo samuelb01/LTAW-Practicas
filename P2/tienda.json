@@ -4,13 +4,13 @@
       "nombre": "The Nightmare Before Christmas - Sally",
       "descripcion": "Sally ha escapado del Dr. Fniklestein y está buscando unirse a tu colección de Pesadilla Antes de Navidad. Ayúdala a reunirse con Jack y sus amigos.",
       "precio": "15.00",
-      "stock": 8
+      "stock": 5
     },
     {
       "nombre": "The Nightmare Before Christmas - Pumpkin King",
       "descripcion": "What's this? ¡El Rey Calabaza ha traído Halloween a Halloween Town! ¡Si quieres pasar un momento escalofriantemente divertido no hay nadie mejor que Jack Skellington como el Rey Calabaza!",
       "precio": "15.00",
-      "stock": 8
+      "stock": 9
     },
     {
       "nombre": "The Nightmare Before Christmas - Oogie Boogie",
@@ -28,7 +28,7 @@
       "nombre": "My Hero Academia - Izuku Midoriya",
       "descripcion": "Izuku Midoriya nació sin poderes, pero gracias al mítico héroe All Might heredó el poder del One For All. Gracias a su entrenamiento ha conseguido ponerse a la altura de sus compañeros, aunque aún le queda un duro camino. ¿Le ayudarás a conseguirlo?",
       "precio": "15.00",
-      "stock": 8
+      "stock": 4
     },
     {
       "nombre": "My Hero Academia - Ochaco Uraraka",
@@ -52,13 +52,13 @@
       "nombre": "One Piece - TonyTony Chopper",
       "descripcion": "Después de comerse una fruta del diablo, el reno TonyTony Chopper se convirtió en el querido médico de los Sombrero de Paja. ¡Ayúdale a reunirse con sus compañeros!",
       "precio": "15.00",
-      "stock": 8
+      "stock": 1
     },
     {
       "nombre": "Naruto - Tobi",
       "descripcion": "Obito Uchiha se esconde bajo una máscara y el nombre de Tobi, planeando la creación del mundo ideal, como Madara planeó antes que él. ¡Ayúdale con su plan añadiendolo a tu colección de Naruto!",
       "precio": "15.00",
-      "stock": 8
+      "stock": 5
     },
     {
       "nombre": "Naruto - Orochimaru",
@@ -85,6 +85,18 @@
       "nombre_real": "Samuel Bellon",
       "mail": "samuelb@gmail.com",
       "password": "HolaSoySamuel"
+    },
+    {
+      "nombre_usuario": "",
+      "nombre_real": "",
+      "mail": "",
+      "password": ""
+    },
+    {
+      "nombre_usuario": "",
+      "nombre_real": "",
+      "mail": "",
+      "password": ""
     }
   ],
   "pedidos": [

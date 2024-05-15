@@ -82,6 +82,20 @@ body {
     background-size: 120px;
 }
 
+#resultado-busqueda {
+    position: absolute;
+    background: #e9ecef;
+    border: 2px solid #5e17eb;
+    border-radius: 5px;
+    width: 100%;
+    max-width: max-content;
+    z-index: 1000;
+    display: none;   /* Propiedad a cambiar para que se muestre */
+    margin-top: 5px;
+    padding: 10px;
+    
+}
+
 .contenedor {
     margin-top: 2%;
     margin-left: 15%;

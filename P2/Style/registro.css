@@ -71,6 +71,21 @@ header {
 .naveg a:hover {
     color: #cb6ce6; /* Color de fondo del enlace al pasar el ratón */
 }
+
+#resultado-busqueda {
+    position: absolute;
+    background: #e9ecef;
+    border: 2px solid #5e17eb;
+    border-radius: 5px;
+    width: 100%;
+    max-width: max-content;
+    z-index: 1000;
+    display: none;   /* Propiedad a cambiar para que se muestre */
+    margin-top: 5px;
+    padding: 10px;
+    
+}
+
 body {
     font-family: Arial, sans-serif; 
 

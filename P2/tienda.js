@@ -267,7 +267,6 @@ const server = http.createServer((req, res) => {
             });
         }
 
-
     } else if (myURL.pathname.endsWith('/logout.html')) {  //-- LOGOUT
 
         leerFichero(PAGINA_LOGOUT, (err, data) => {
@@ -316,7 +315,7 @@ const server = http.createServer((req, res) => {
                     } else {
                         data = data.toString();
                         data = data.replace("AVISO", "PRODUCTO AÑADIDO AL CARRITO");
-                        data = data.replace("AVISO_CUERPO", "Puede volcer a la tienda para seguir comprando :)");
+                        data = data.replace("AVISO_CUERPO", "Puede regresar a la tienda para seguir comprando :)");
 
                         //-- Se reduce el número de stock del producto
                         productos.forEach((element, index) => {
@@ -466,7 +465,7 @@ const server = http.createServer((req, res) => {
             // Escribir el JSON actualizado de vuelta al archivo
             fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
     
-            // Página de registro exitoso
+            // Página de pedido exitoso
             leerFichero(PAGINA_AVISO, (err, data) => {
                 if (err) {
                     code_404(res);
@@ -511,43 +510,64 @@ const server = http.createServer((req, res) => {
         password = myURL.searchParams.get('password');
         mail = myURL.searchParams.get('mail');
 
-        const nuevoUsuario = {
-            "nombre_usuario": username,
-            "nombre_real": real_name,
-            "mail": mail,
-            "password": password
-        };
+        //-- Tiene que haber por lo menos un caracter en cada parámetro
+        if (username.length > 1 && real_name.length > 1 && password.length > 1 && mail.length > 1) {
 
-        // Agregar el nuevo objeto al array de usuarios
-        usuarios.push(nuevoUsuario);
+            const nuevoUsuario = {
+                "nombre_usuario": username,
+                "nombre_real": real_name,
+                "mail": mail,
+                "password": password
+            };
+
+            // Agregar el nuevo objeto al array de usuarios
+            usuarios.push(nuevoUsuario);
+            
+            // Convertir el objeto JavaScript de nuevo a formato JSON
+            const nuevoJsonTienda = JSON.stringify(tienda, null, 2);
+            
+            // Escribir el JSON actualizado de vuelta al archivo
+            fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
+
+            // Página de registro exitoso
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace("AVISO", "Se ha registrado correctamente");
+                    data = data.replace("AVISO_CUERPO", "Bienvenido al FunkoVerse " + username)
+
+                    //-- Se asigna la cookie correpondiente al usuario logeado
+                    res.setHeader('Set-cookie', "user=" + username)
+
+                    //-- En este caso particular declaro el user, ya que si se realiza un registro exitoso, la cookie con
+                    //-- el usuario se va a tener que mandar
+                    user = username;
+                    
+                    //-- Envío del rescurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
         
-        // Convertir el objeto JavaScript de nuevo a formato JSON
-        const nuevoJsonTienda = JSON.stringify(tienda, null, 2);
-        
-        // Escribir el JSON actualizado de vuelta al archivo
-        fs.writeFileSync('tienda.json', nuevoJsonTienda, 'utf8')
+        } else {
 
-        // Página de registro exitoso
-        leerFichero(PAGINA_AVISO, (err, data) => {
-            if (err) {
-                code_404(res);
-            } else {
-                data = data.toString();
-                data = data.replace("AVISO", "Se ha registrado correctamente");
-                data = data.replace("AVISO_CUERPO", "Bienvenido al FunkoVerse " + username)
+            leerFichero(PAGINA_AVISO, (err, data) => {
+                if (err) {
+                    code_404(res);
+                } else {
+                    data = data.toString();
+                    data = data.replace("AVISO", "TIENE UNA NUEVA TRASNMISIÓN DEL FUNKOVERSE");
+                    data = data.replace("AVISO_CUERPO", "Debe rellenar todos los datos");
+    
+                    //-- Envío del recurso procesado
+                    content_type = 'text/html';
+                    code_200(res, data, content_type, user);
+                }
+            });
 
-                //-- Se asigna la cookie correpondiente al usuario logeado
-                res.setHeader('Set-cookie', "user=" + username)
-
-                //-- En este caso particular declaro el user, ya que si se realiza un registro exitoso, la cookie con
-                //-- el usuario se va a tener que mandar
-                user = username;
-                
-                //-- Envío del rescurso procesado
-                content_type = 'text/html';
-                code_200(res, data, content_type, user);
-            }
-        });
+        }
 
     } else if (myURL.pathname == '/producto') { //-- CREAR PÁGINA DE LOS PRODUCTOS
         // Crear la página de los productos
