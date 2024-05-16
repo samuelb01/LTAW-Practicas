@@ -7,7 +7,7 @@
     -> Intercambio de datos entre clinte y servidor con socket.io
     -> Aplicación web se desarrollará con express
 
-    -> Cada mensaje enviado por usuarios será visible para el resto (servidor se encarga)   DONE
+    -> Cada mensaje enviado por usuarios será visible para el resto (servidor se encarga)   DONE??
     -> Comandos especiales
         '-> Respuesta solo visible por el usuario que lo escriba
         '-> '/help': Muestra lista con todos los comandos soportados
