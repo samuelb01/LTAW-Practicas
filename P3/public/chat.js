@@ -2,6 +2,7 @@
 // const socket = io();//-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
+const colors = require('colors');
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -22,6 +23,10 @@ socket.on("disconnect", ()=> {
 
 socket.on("message", (msg)=>{
     display.innerHTML += '<p style="color:blue">' + msg + '</p>';
+});
+
+socket.on("comando", (msg)=>{
+    display.innerHTML += '<p style="color:red">' + msg + '</p>';
 });
 
 socket.on("rest-of-users", (msg)=>{

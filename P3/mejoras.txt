@@ -12,13 +12,16 @@
         '-> Respuesta solo visible por el usuario que lo escriba
         '-> '/help': Muestra lista con todos los comandos soportados
         '-> '/list': Devuelve nº de user conectados
-        '-> '/hello': Servidor devuelve un saludo
+        '-> '/hello': Servidor devuelve un saludo  DONE
         '-> '/date': Devuelve la fecha
     -> Si server detecta mensaje que empieza por '/', lo intrepreta como comando
     -> Mensajes que no seaan comandos sí que los reenvía al resto de clientes
 
 
     -------- MEJORAS --------
+    -> AÑADIDAS
+        '-> Si el comando no se encuentra se responde con comando no encontrado
+
     -> POSIBLES MEJORAS
         '-> Sonidos cuando se recibe mensaje
         '-> Nicknames de los usuarios   DONE

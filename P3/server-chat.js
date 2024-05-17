@@ -79,11 +79,11 @@ io.on('connect', (socket) => {
                   break;
 
                 case 'list':
-
+                    //socket.sen('comando', )
                     break;
 
                 case 'hello':
-                  socket.send('HOLA WUAPO');
+                  socket.send('comando', 'hello/HOLA WUAPO');
 
                   break;
 
@@ -92,7 +92,7 @@ io.on('connect', (socket) => {
                     break;
 
                 default:
-                    socket.send('Comando no encontrado');
+                    socket.send('comando', 'error/Comando no encontrado');
               }
             
             
