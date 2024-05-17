@@ -2,6 +2,7 @@
 // const socket = io();//-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
+const disconnect_btn = document.getElementById("boton_desconectar");
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -32,6 +33,10 @@ socket.on("comando", (msg)=>{
 
     //-- Decidir sobre los tipos de comandos
     switch (comandoValue) {
+        case 'list':
+            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+            break;
+
         case 'hello':
             display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
             break;
@@ -59,4 +64,8 @@ msg_entry.onchange = () => {
         msg_entry.value = "";
     }
     
+}
+
+disconnect_btn.onkeydown = () => {
+    socket.emit('disconnect', 'hola');
 }

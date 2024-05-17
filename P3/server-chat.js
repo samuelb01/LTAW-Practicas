@@ -89,7 +89,7 @@ io.on('connect', (socket) => {
                   break;
 
                 case 'list':
-                    //socket.sen('comando', )
+                    socket.emit("comando", `list/${all_users}`);
                     break;
 
                 case 'hello':
@@ -118,11 +118,23 @@ io.on('connect', (socket) => {
     //-- Evento de desconexión
     socket.on('disconnect', () => {
         if (socket.username) {
+            console.log(socket.username);
             io.send('message', { username: 'Servidor', message: `${socket.username} se ha desconectado` });
+
+            //-- Eliminar usuario del array de usuarios
+            let index = all_users.indexOf(username);
+
+            if (index !== -1) {
+                // Eliminar el usuario del array
+                all_users.splice(index, 1);
+            } else {
+                console.log('El usuario especificado no existe en el array.');
+            }
         }
     });
 
     console.log(all_users)
+
 });
 
 //-- Lanzar el servidor HTTP
