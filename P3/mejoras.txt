@@ -21,6 +21,8 @@
     -------- MEJORAS --------
     -> AÑADIDAS
         '-> Si el comando no se encuentra se responde con comando no encontrado
+        '-> Página login para el nickname antes de acceder al chat
+
 
     -> POSIBLES MEJORAS
         '-> Sonidos cuando se recibe mensaje

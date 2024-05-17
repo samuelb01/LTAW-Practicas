@@ -17,7 +17,8 @@ const server = http.Server(app);
 const io = socket(server);
 
 //---------- Variables ----------
-all_users = []
+all_users = [];
+comandos_disponibes = ['help', 'hello', 'date', 'list'];
 
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
@@ -58,6 +59,20 @@ app.get('/chat', (req, res) => {
     res.sendFile(__dirname + '/public/chat.html');
 });
 
+function getDate() {
+    //-- padStart asegura que tenga dos dígitos, añadiendo 0 delante si fuese necesario
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');  //-- Se le suma 1 porque da los meses del 0 al 11
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    //-- Formato para sacar la fecha YYYY-MM-DD hh:mm:ss
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
@@ -84,24 +99,24 @@ io.on('connect', (socket) => {
             //-- Gestionar comandos
             switch (comando) {
                 case 'help':
-                  
-
-                  break;
+                    socket.emit("comando", `Los comandos disponibles son: /${comandos_disponibes.join(", /")}`);
+                    break;
 
                 case 'list':
-                    socket.emit("comando", `list/${all_users}`);
+                    socket.emit("comando", `Los usuarios conectados son: ${all_users.join(", ")}`);
                     break;
 
                 case 'hello':
-                  socket.emit("comando", 'hello/HOLA WUAPO');
-                  break;
+                    socket.emit("comando", 'Bienvenido al chat, espero que disfrute de la experiencia :)');
+                    break;
 
                 case 'date':
-
+                    socket.emit("comando", `La fecha actual es: ${getDate()}`);
                     break;
 
                 default:
-                    socket.emit("comando", 'error/Comando no encontrado');
+                    socket.emit("comando", 'Comando no encontrado, use "/help" para obtener una lista con todos los comandos disponibles.');
+                    break;
             }
             
             
@@ -111,29 +126,14 @@ io.on('connect', (socket) => {
             io.send(`${username}: ${message}`);
 
         }
-
-        
     });
 
     //-- Evento de desconexión
     socket.on('disconnect', () => {
         if (socket.username) {
-            console.log(socket.username);
             io.send('message', { username: 'Servidor', message: `${socket.username} se ha desconectado` });
-
-            //-- Eliminar usuario del array de usuarios
-            let index = all_users.indexOf(username);
-
-            if (index !== -1) {
-                // Eliminar el usuario del array
-                all_users.splice(index, 1);
-            } else {
-                console.log('El usuario especificado no existe en el array.');
-            }
         }
     });
-
-    console.log(all_users)
 
 });
 

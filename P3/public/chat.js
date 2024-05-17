@@ -27,27 +27,37 @@ socket.on("message", (msg)=>{
 
 socket.on("comando", (msg)=>{
 
-    //-- Los comandos se reciben como: "ComandoValue/mensaje"
-    comandoValue = msg.split('/')[0];   //-- Tipo de comando
-    msg_split = msg.split('/')[1];      //-- Mensaje del comando a mostrar
+    display.innerHTML += '<p style="color:red">' + msg + '</p>';
 
-    //-- Decidir sobre los tipos de comandos
-    switch (comandoValue) {
-        case 'list':
-            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-            break;
+    // //-- Los comandos se reciben como: "ComandoValue/mensaje"
+    // comandoValue = msg.split('/')[0];   //-- Tipo de comando
+    // msg_split = msg.split('/')[1];      //-- Mensaje del comando a mostrar
 
-        case 'hello':
-            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-            break;
+    // //-- Decidir sobre los tipos de comandos
+    // switch (comandoValue) {
+    //     case 'list':
+    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+    //         break;
 
-        case 'error':
-            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-            break;
+    //     case 'list':
+    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+    //         break;
+
+    //     case 'list':
+    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+    //         break;
+
+    //     case 'hello':
+    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+    //         break;
+
+    //     case 'error':
+    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+    //         break;
     
-        default:
-            break;
-    }   
+    //     default:
+    //         break;
+    // }   
 });
 
 socket.on("rest-of-users", (msg)=>{
@@ -66,6 +76,8 @@ msg_entry.onchange = () => {
     
 }
 
-disconnect_btn.onkeydown = () => {
+disconnect_btn.addEventListener('click', () => {
+    display.innerHTML += '<p style="color:blue">HOLA CARACOLA</p>';
     socket.emit('disconnect', 'hola');
-}
+});
+
