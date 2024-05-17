@@ -16,6 +16,9 @@ const server = http.Server(app);
 //-- Crear el servidor de websockets, asociado al servidor http
 const io = socket(server);
 
+//---------- Variables ----------
+all_users = []
+
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
 app.get('/', (req, res) => {
@@ -37,7 +40,14 @@ app.use(express.static('public'));
 app.post('/login', (req, res) => {
     const { username } = req.body;
     if (username.trim() !== '') {
-        res.redirect(`/chat?username=${username}`);
+        
+        if (!all_users.includes(username)) {
+            all_users.push(username);
+            res.redirect(`/chat?username=${username}`);
+        } else {
+            res.redirect('/public/login_error.html');
+        }
+
     } else {
         res.redirect('/');
     }
@@ -83,8 +93,7 @@ io.on('connect', (socket) => {
                     break;
 
                 case 'hello':
-                  socket.send('comando', 'hello/HOLA WUAPO');
-
+                  socket.emit("comando", 'hello/HOLA WUAPO');
                   break;
 
                 case 'date':
@@ -92,8 +101,8 @@ io.on('connect', (socket) => {
                     break;
 
                 default:
-                    socket.send('comando', 'error/Comando no encontrado');
-              }
+                    socket.emit("comando", 'error/Comando no encontrado');
+            }
             
             
         } else {  //-- MENSAJE NORMAL
@@ -113,6 +122,7 @@ io.on('connect', (socket) => {
         }
     });
 
+    console.log(all_users)
 });
 
 //-- Lanzar el servidor HTTP

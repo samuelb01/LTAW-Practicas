@@ -2,7 +2,6 @@
 // const socket = io();//-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
-const colors = require('colors');
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -10,7 +9,7 @@ const socket = io();
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
 
-let contador = 1;
+//let contador = 1;
 
 socket.on("connect", () => {
     //-- Enviar mensaje inicial
@@ -26,7 +25,24 @@ socket.on("message", (msg)=>{
 });
 
 socket.on("comando", (msg)=>{
-    display.innerHTML += '<p style="color:red">' + msg + '</p>';
+
+    //-- Los comandos se reciben como: "ComandoValue/mensaje"
+    comandoValue = msg.split('/')[0];   //-- Tipo de comando
+    msg_split = msg.split('/')[1];      //-- Mensaje del comando a mostrar
+
+    //-- Decidir sobre los tipos de comandos
+    switch (comandoValue) {
+        case 'hello':
+            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+            break;
+
+        case 'error':
+            display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
+            break;
+    
+        default:
+            break;
+    }   
 });
 
 socket.on("rest-of-users", (msg)=>{

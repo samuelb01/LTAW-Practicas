@@ -1,0 +1,26 @@
+<!-- LOGIN PARA INTRODUCIR USUARIO -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+
+    <!-- Cargar la biblioteca Socket.IO. Nos la debe entregar el servidor -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Cliente que usa los Sockets.io-->
+    <!-- <script src="login.js" defer></script> -->
+
+</head>
+<body>
+
+    <form id="formularioLogin" action="/login" method="post">
+        <input id="username" name="username" placeholder="Ingrese su nombre de usuario">
+        <button type="submit">Acceder al chat</button>
+    </form>
+    <p style="color:red">EL NOMBRE DE USUARIO YA EXISTE</p>
+
+</body>
+</html>
