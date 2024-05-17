@@ -26,38 +26,7 @@ socket.on("message", (msg)=>{
 });
 
 socket.on("comando", (msg)=>{
-
     display.innerHTML += '<p style="color:red">' + msg + '</p>';
-
-    // //-- Los comandos se reciben como: "ComandoValue/mensaje"
-    // comandoValue = msg.split('/')[0];   //-- Tipo de comando
-    // msg_split = msg.split('/')[1];      //-- Mensaje del comando a mostrar
-
-    // //-- Decidir sobre los tipos de comandos
-    // switch (comandoValue) {
-    //     case 'list':
-    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-    //         break;
-
-    //     case 'list':
-    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-    //         break;
-
-    //     case 'list':
-    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-    //         break;
-
-    //     case 'hello':
-    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-    //         break;
-
-    //     case 'error':
-    //         display.innerHTML += '<p style="color:red">' + msg_split + '</p>'; 
-    //         break;
-    
-    //     default:
-    //         break;
-    // }   
 });
 
 socket.on("rest-of-users", (msg)=>{
