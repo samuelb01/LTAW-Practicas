@@ -47,8 +47,3 @@ msg_entry.onchange = () => {
     
 }
 
-disconnect_btn.addEventListener('click', () => {
-    display.innerHTML += '<p style="color:blue">HOLA CARACOLA</p>';
-    socket.emit('disconnect', 'hola');
-});
-
