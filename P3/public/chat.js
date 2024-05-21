@@ -1,8 +1,10 @@
-//-- Crear un websocket. Se establece la conexión con el servidor
-// const socket = io();//-- Elementos del interfaz
+//-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
 const disconnect_btn = document.getElementById("boton_desconectar");
+
+//-- Archivo de audio para cunado se envíen mensajes
+const audioMensaje = document.getElementById("miAudio")
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -10,7 +12,6 @@ const socket = io();
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
 
-//let contador = 1;
 
 socket.on("connect", () => {
     //-- Enviar mensaje inicial
@@ -23,6 +24,7 @@ socket.on("disconnect", ()=> {
 
 socket.on("message", (msg)=>{
     display.innerHTML += '<p style="color:blue">' + msg + '</p>';
+    audioMensaje.play();
 });
 
 socket.on("comando", (msg)=>{
