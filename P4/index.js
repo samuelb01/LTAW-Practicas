@@ -17,3 +17,8 @@ chrome_version.textContent = process.versions.chrome;
 electron.ipcRenderer.on('numero-usuarios', (event, message) => {
     numero_usuarios.textContent = message;
 });
+
+//-- Evento recibido del proceso principal con la ip de conexión
+electron.ipcRenderer.on('direccion-ip', (event, message) => {
+    direccion_IP.textContent = message;
+});

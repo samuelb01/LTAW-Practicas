@@ -4,7 +4,8 @@ const http = require('http');
 const express = require('express');
 const colors = require('colors');
 const { Socket } = require('dgram');
-const electron = require("electron");
+const electron = require('electron');
+const ip = require('ip');  //- Módulo para obtener la dirección IP
 
 //-- Variable para acceder a la ventana principal
 let win = null;
@@ -172,7 +173,14 @@ electron.app.on('ready', () => {
     //-- Cargar interfaz gráfica
     win.loadFile("index.html")
 
+    win.on('ready-to-show', () => {
+        win.webContents.send('numero-usuarios', 0)
+        win.webContents.send('direccion-ip', `${ip.address()}:${PORT}`)
+    })
+
 });
+
+
 
 
 //-- Lanzar el servidor HTTP
