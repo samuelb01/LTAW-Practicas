@@ -50,6 +50,10 @@ app.post('/login', (req, res) => {
         if (!all_users.includes(username)) {
             all_users.push(username);
             res.redirect(`/chat?username=${username}`);
+
+            //-- Cada vez que se registre un nuevo usuario, ctualizamos la interfaz gráfica
+            win.webContents.send('numero-usuarios', all_users.length);
+
         } else {
             res.redirect('/public/login_error.html');
         }
@@ -165,7 +169,9 @@ electron.app.on('ready', () => {
     //-- Si se quiere eliminar el menú por defecto hay que añadir:
     //win.setMenuBarVisibility(false);
 
+    //-- Cargar interfaz gráfica
     win.loadFile("index.html")
+
 });
 
 

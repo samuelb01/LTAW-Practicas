@@ -12,3 +12,8 @@ const direccion_IP = document.getElementById("direccion_IP");
 node_version.textContent = process.versions.node;
 electron_version.textContent = process.versions.electron;
 chrome_version.textContent = process.versions.chrome;
+
+//-- Evento recibido del proceso principal con el nº de usuarios
+electron.ipcRenderer.on('numero-usuarios', (event, message) => {
+    numero_usuarios.textContent = message;
+});
