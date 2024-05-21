@@ -186,6 +186,11 @@ electron.app.on('ready', () => {
 
 });
 
+electron.ipcMain.handle('test', (event, message) => {
+    console.log(message);
+    io.send(message);
+})
+
 
 
 
