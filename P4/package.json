@@ -2,11 +2,14 @@
     "name": "home-chat",
     "description": "Aplicación de chat para la P4 de LTAW",
     "version": "0.1.0",
-    "main": "main.js",
+    "main": "server-chat.js",
     "scripts": {
         "start": "electron ."
     },
     "dependencies": {
-        "electron": "^30.0.6"
+        "electron": "^30.0.6",
+        "colors": "^1.4.0",
+        "express": "^4.19.2",
+        "socket.io": "^4.7.5"
     }
 }

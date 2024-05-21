@@ -4,7 +4,12 @@ const http = require('http');
 const express = require('express');
 const colors = require('colors');
 const { Socket } = require('dgram');
+const electron = require("electron");
 
+//-- Variable para acceder a la ventana principal
+let win = null;
+
+//-- Puerto de conexión
 const PUERTO = 9090;
 
 //-- Crear una nueva aplciacion web
@@ -136,6 +141,35 @@ io.on('connect', (socket) => {
     });
 
 });
+
+
+//////////////---- ELECTRON ----//////////////
+//-- Punto de entrada
+//-- Cuando electron está listo ejecuta esta función
+electron.app.on('ready', () => {
+    console.log("Evento ready!");
+
+    //-- Crear la ventana principal de la aplicación
+    win = new electron.BrowserWindow({
+        width: 600,     //-- Anchura
+        height: 400,     //-- Altura
+
+        //-- Permitir acceso al sistema
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+
+    })
+
+    
+
+    //-- Si se quiere eliminar el menú por defecto hay que añadir:
+    //win.setMenuBarVisibility(false);
+
+    win.loadFile("index.html")
+});
+
 
 //-- Lanzar el servidor HTTP
 //-- ¡Que empiecen los juegos de los WebSockets!

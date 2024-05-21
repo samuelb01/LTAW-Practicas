@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home chat</title>
+
+    <!-- Only scripts and files from the local machine are allowed -->
+    <!-- It removes the security Warning: Insecure Content-Security-Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';" />
+
+    <!-- Cargar la biblioteca Socket.IO. Nos la debe entregar el servidor -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Estilo -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <h1>Interfaz gráfica</h1>
+    <input type="button" name="Test" id="btn_test">
+    <p>Display</p>
+    
+</body>
+</html>
