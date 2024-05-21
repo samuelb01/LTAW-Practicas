@@ -12,6 +12,7 @@ let win = null;
 
 //-- Puerto de conexión
 const PUERTO = 9090;
+const direccion_conexion = `${ip.address()}:${PUERTO}`;
 
 //-- Crear una nueva aplciacion web
 const app = express();
@@ -135,6 +136,9 @@ io.on('connect', (socket) => {
             //-- Reenviarlo a todos los clientes conectados
             io.send(`${username}: ${message}`);
 
+            //-- Mandarlo a la aplicación del servidor
+            win.webContents.send('mensaje', `${username}: ${message}`)
+
         }
     });
 
@@ -173,9 +177,11 @@ electron.app.on('ready', () => {
     //-- Cargar interfaz gráfica
     win.loadFile("index.html")
 
+    //-- Se espera a que cargue y se muestre la página
+    //-- Se envían varios datos iniciales para mostrar en el proceso de renderizado
     win.on('ready-to-show', () => {
-        win.webContents.send('numero-usuarios', 0)
-        win.webContents.send('direccion-ip', `${ip.address()}:${PORT}`)
+        win.webContents.send('numero-usuarios', 0);
+        win.webContents.send('direccion-ip', direccion_conexion);
     })
 
 });
