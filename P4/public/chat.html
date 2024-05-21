@@ -1,0 +1,40 @@
+<!-- PÁGINA DEL CHAT UNA VEZ ACCEDIDO -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalkTime</title>
+
+  <!-- Estilo -->
+  <link rel="stylesheet" href="chat.css">
+
+  <!-- Cargar la biblioteca Socket.IO. Nos la debe entregar el servidor -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Cliente que usa los Sockets.io-->
+  <script src="chat.js" defer></script>
+
+</head>
+
+<body>
+  <div class="chat-container">
+    <div class="chat-header">TALKTIME</div>
+  
+    <div class="chat-input">
+      <input type="text" placeholder="Escribe aquí los mensajes..." autocomplete="off" id="msg_entry">
+      <button id="send_button">Enviar</button>
+    </div>
+  
+    <div class="chat-messages" id="display"></div>
+      
+  </div>
+
+  <!-- Añadir el archivo de sonido -->
+  <audio id="miAudio">
+    <source src="mensaje.mp3" type="audio/mpeg">
+  </audio>
+
+</body>
+</html>
