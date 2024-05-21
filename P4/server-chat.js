@@ -160,8 +160,8 @@ electron.app.on('ready', () => {
 
     //-- Crear la ventana principal de la aplicación
     win = new electron.BrowserWindow({
-        width: 600,     //-- Anchura
-        height: 400,     //-- Altura
+        width: 1000,     //-- Anchura
+        height: 700,     //-- Altura
 
         //-- Permitir acceso al sistema
         webPreferences: {
@@ -180,7 +180,7 @@ electron.app.on('ready', () => {
     //-- Se espera a que cargue y se muestre la página
     //-- Se envían varios datos iniciales para mostrar en el proceso de renderizado
     win.on('ready-to-show', () => {
-        win.webContents.send('numero-usuarios', 0);
+        win.webContents.send('numero-usuarios', all_users.length);
         win.webContents.send('direccion-ip', direccion_conexion);
     })
 

@@ -26,23 +26,38 @@
 
         <div id="columnas">
             <div id="columna1">
-                <h2>Info</h2>
-                <ul>
-                    <li>Versión de Node: <span id="node_version"></span></li>
-                    <li>Versión de Electron: <span id="electron_version"></span></li>
-                    <li>Versión de Chrome: <span id="chrome_version"></span></li>
-                </ul>
-                <h2>Usuarios conectados</h2>
-                <p id="numero_usuarios"></p>
-                <h2>Dirección IP</h2>
-                <p id="direccion_IP">dsa</p>
+                <div class="seccion">
+                    <h2>Info</h2>
+                    <ul>
+                        <li>Versión de Node: <span id="node_version"></span></li>
+                        <li>Versión de Electron: <span id="electron_version"></span></li>
+                        <li>Versión de Chrome: <span id="chrome_version"></span></li>
+                    </ul>
+                </div>
+
+                <div class="seccion">
+                    <h2>Usuarios conectados</h2>
+                    <p id="numero_usuarios"></p>
+                </div>
+
+                <div class="seccion">
+                    <h2>Dirección IP</h2>
+                    <p id="direccion_IP"></p>
+                </div>
             </div>
 
             <div id="columna2">
-                <h2>Pruebas</h2>
-                <input type="button" value="Botón de pruebas" id="btn_pruebas">
-                <h2>Mensjaes</h2>
-                <div class="chat-messages" id="display"></div>
+                <div class="seccion">
+                    <h2>Pruebas</h2>
+                    <div class="btn_container">
+                        <input type="button" value="Botón de pruebas" id="btn_pruebas">
+                    </div>
+                </div>
+                
+                <div class="seccion">
+                    <h2>Mensajes</h2>
+                    <div class="chat-messages" id="display"></div>
+                </div>
             </div>
         </div>
 

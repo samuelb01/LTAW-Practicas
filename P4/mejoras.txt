@@ -10,7 +10,5 @@ Tiene que teenr interfaz gráfica con:
 
     Basta con que la app arranque con npm start
 
-
-    - MEJORAS
-        - meter qr?
+No hay mejoras en esta práctica, falta de tiempo
         
