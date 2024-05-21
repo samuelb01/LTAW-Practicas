@@ -31,7 +31,7 @@ electron.ipcRenderer.on('direccion-ip', (event, message) => {
     direccion_IP.textContent = message;
 });
 
-//-- Evento recibido del proceso principal con la ip de conexión
+//-- Evento recibido del proceso principal con los mensajes de los clientes
 electron.ipcRenderer.on('mensaje', (event, message) => {
     display.innerHTML += '<p>' + message + '</p>';
 });
