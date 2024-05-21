@@ -9,18 +9,44 @@
     <!-- It removes the security Warning: Insecure Content-Security-Policy -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';" />
 
-    <!-- Cargar la biblioteca Socket.IO. Nos la debe entregar el servidor -->
-    <script src="/socket.io/socket.io.js"></script>
-
     <!-- Estilo -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Proceso asociado a la página -->
+    <script src="index.js" defer></script>
 
 </head>
 <body>
 
-    <h1>Interfaz gráfica</h1>
-    <input type="button" name="Test" id="btn_test">
-    <p>Display</p>
+    <div id="container">
+
+        <div id="cabecera-container">
+            <h1>Home chat (SERVER)</h1>
+        </div>
+
+        <div id="columnas">
+            <div id="columna1">
+                <h2>Info</h2>
+                <ul>
+                    <li>Versión de Node: <span id="node_version"></span></li>
+                    <li>Versión de Electron: <span id="electron_version"></span></li>
+                    <li>Versión de Chrome: <span id="chrome_version"></span></li>
+                </ul>
+                <h2>Usuarios conectados</h2>
+                <p id="numero_usuarios"></p>
+                <h2>Dirección IP</h2>
+                <p id="direccion_IP"></p>
+            </div>
+
+            <div id="columna2">
+                <h2>Pruebas</h2>
+                <input type="button" name="boton" value="botttttonn" id="btn">
+                <h2>Mensjaes</h2>
+                <div class="chat-messages" id="display"></div>
+            </div>
+        </div>
+
+    </div>
     
 </body>
 </html>

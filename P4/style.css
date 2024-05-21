@@ -1,12 +1,26 @@
-h1 {
-    width: 93%;
-    padding: 20px;
-    background-color: lightgreen;
-    border-radius: 10px;
-    text-align: center;
-  }
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-#display {
-    border: 2px solid lightblue;
-    padding: 10px;
+#columnas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#cabecera-container {
+  border: 1px solid #cb6ce6;
+  border-radius: 10px;
+}
+
+#columna1 {
+  border: 1px solid #cb6ce6;
+  border-radius: 10px;
+}
+
+#columna2 {
+  border: 1px solid #cb6ce6;
+  border-radius: 10px;
 }

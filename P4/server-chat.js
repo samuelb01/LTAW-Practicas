@@ -162,8 +162,6 @@ electron.app.on('ready', () => {
 
     })
 
-    
-
     //-- Si se quiere eliminar el menú por defecto hay que añadir:
     //win.setMenuBarVisibility(false);
 
